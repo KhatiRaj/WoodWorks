@@ -1021,11 +1021,11 @@
 
     <!-- Lightbox HTML -->
     <div id="lightbox" class="lightbox-container">
-        <span class="lightbox-close-btn">&times;</span>
+        <span class="lightbox-close-btn">×</span>
         <div class="lightbox-content-wrapper">
             <img class="lightbox-image" id="lightboxImage" src="" alt="Enlarged furniture">
-            <a class="lightbox-nav lightbox-prev-btn">&#10094;</a>
-            <a class="lightbox-nav lightbox-next-btn">&#10095;</a>
+            <a class="lightbox-nav lightbox-prev-btn">❮</a>
+            <a class="lightbox-nav lightbox-next-btn">❯</a>
         </div>
         <div class="lightbox-caption" id="lightboxCaption">Image caption</div>
     </div>
@@ -1270,7 +1270,7 @@
                 const category = galleryCategories.find(cat => cat.id === categoryId);
                 if (!category || !lightbox || !category.imageFiles || category.imageFiles.length === 0) return;
 
-                currentLight caveatImagePaths = category.imageFiles.map(fileName => `images/${category.folderName}/${fileName}`);
+                currentLightboxImagePaths = category.imageFiles.map(fileName => `images/${category.folderName}/${fileName}`);
                 currentImageIndex = imgIndex;
                 
                 document.body.style.overflow = 'hidden';

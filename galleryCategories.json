@@ -1,0 +1,90 @@
+[
+    {
+        "id": "bed",
+        "displayName": "Bed",
+        "folderName": "Bed",
+        "imageFiles": [
+            "1.jpg",
+            "2.jpg",
+            "3.jpg",
+            "4.jpg"
+        ]
+    },
+    {
+        "id": "tv-unit",
+        "displayName": "TV Unit",
+        "folderName": "TV_Unit",
+        "imageFiles": [
+            "1.jpg",
+            "2.jpg",
+            "3.jpg",
+            "4.jpg"
+        ]
+    },
+    {
+        "id": "dining-table",
+        "displayName": "Dining Table",
+        "folderName": "Dining_Table",
+        "imageFiles": [
+            "1.jpg",
+            "2.jpg",
+            "3.jpg",
+            "4.jpg"
+        ]
+    },
+    {
+        "id": "sofa",
+        "displayName": "Sofa",
+        "folderName": "Sofa",
+        "imageFiles": [
+            "1.jpg",
+            "2.jpg",
+            "3.jpg",
+            "4.jpg"
+        ]
+    },
+    {
+        "id": "wooden-ceiling",
+        "displayName": "Wooden Ceiling",
+        "folderName": "Wooden_Ceiling",
+        "imageFiles": [
+            "1.jpg",
+            "2.jpg",
+            "3.jpg",
+            "4.jpg"
+        ]
+    },
+    {
+        "id": "kitchen",
+        "displayName": "Kitchen",
+        "folderName": "Kitchen",
+        "imageFiles": [
+            "1.jpg",
+            "2.jpg",
+            "3.jpg",
+            "4.jpg"
+        ]
+    },
+    {
+        "id": "cupboard",
+        "displayName": "Cupboard",
+        "folderName": "Cupboard",
+        "imageFiles": [
+            "1.jpg",
+            "2.jpg",
+            "3.jpg",
+            "4.jpg"
+        ]
+    },
+    {
+        "id": "furniture",
+        "displayName": "Furniture",
+        "folderName": "Furniture",
+        "imageFiles": [
+            "1.jpg",
+            "2.jpg",
+            "3.jpg",
+            "4.jpg"
+        ]
+    }
+]

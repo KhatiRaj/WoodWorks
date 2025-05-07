@@ -192,7 +192,7 @@
         .hero {
             background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c') center/cover no-repeat;
             color: var(--white-color);
-            padding: 100px 0;
+            padding: 120px 0;
             text-align: center;
             overflow: hidden;
             /* To contain slide-in animations */
@@ -214,7 +214,7 @@
             display: inline-block;
             background-color: var(--primary-color);
             color: var(--white-color);
-            padding: 12px 30px;
+            padding: 10px 30px;
             border-radius: 4px;
             text-decoration: none;
             font-weight: 500;
@@ -466,18 +466,7 @@
             transform: scale(1.2) rotate(-10deg);
         }
 
-
-        .map {
-            border-radius: 8px;
-            overflow: hidden;
-            height: 250px;
-        }
-
-        .map img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+        /* Map removed from here */
 
         .contact-form form {
             display: grid;
@@ -864,8 +853,7 @@
         <div class="container">
             <h1 class="animate-on-scroll slide-in-down">Furniture Made to Fit Your Lifestyle</h1>
             <p class="animate-on-scroll slide-in-up" style="transition-delay: 0.2s;">From Rural Hands to Royal Homes</p>
-            <a href="#contact" class="btn animate-on-scroll slide-in-up" style="transition-delay: 0.4s;">Get in
-                Touch</a>
+            <a href="#contact" class="btn">Get in Touch</a>
         </div>
     </section>
 
@@ -974,10 +962,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="map">
-                        <!-- REPLACE with your actual map image/embed -->
-                        <img src="https://via.placeholder.com/400x250.png?text=Our+Location" alt="Our Location Map">
-                    </div>
+                    <!-- Removed map div from here -->
                 </div>
                 <div class="contact-form animate-on-scroll slide-in-right" style="transition-delay: 0.1s;">
                     <h3>Send Us A Message</h3>
@@ -1326,6 +1311,8 @@
                     }, { threshold: 0.1 });
                     animatedElements.forEach(el => observer.observe(el));
                 } else {
+                    // Fallback for browsers that don't support IntersectionObserver
+                    // Add 'animated' class to all elements at once, or implement a scroll listener
                     animatedElements.forEach(el => el.classList.add('animated'));
                 }
             }

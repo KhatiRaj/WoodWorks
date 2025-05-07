@@ -207,7 +207,9 @@
         .hero p {
             font-size: 1.2rem;
             max-width: 600px;
-            margin: 0 auto 30px;
+            /* MODIFICATION START: Increased bottom margin for more space */
+            margin: 0 auto 50px; /* Was 30px */
+            /* MODIFICATION END */
         }
 
         .btn {
@@ -314,20 +316,27 @@
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
+            gap: 30px; /* MODIFICATION: Increased gap slightly for titles */
         }
 
-        .gallery-item {
+        /* MODIFICATION START: Styles for Gallery Item Structure */
+        .gallery-item { /* Main grid cell wrapper for image and title */
+            display: flex;
+            flex-direction: column;
+            transition: opacity var(--animation-duration) var(--animation-timing-function),
+                transform var(--animation-duration) var(--animation-timing-function);
+            /* Animation classes .animate-on-scroll .scale-up are applied by JS */
+        }
+
+        .gallery-item-image-container {
             position: relative;
             overflow: hidden;
             border-radius: 8px;
-            aspect-ratio: 1 / 1;
-            /* For 1:1 square aspect ratio */
-            cursor: pointer;
-            transition: opacity var(--animation-duration) var(--animation-timing-function),
-                transform var(--animation-duration) var(--animation-timing-function);
+            aspect-ratio: 1 / 1; /* For 1:1 square aspect ratio on the image area */
+            width: 100%;
+            cursor: pointer; /* Make image area clickable */
         }
-
+        
         .gallery-image-slider {
             width: 100%;
             height: 100%;
@@ -356,33 +365,45 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            display: flex;
+            background-color: rgba(0, 0, 0, 0.6); /* Slightly darker for better icon visibility */
+            display: flex; /* For centering icon */
             flex-direction: column;
             justify-content: center;
             align-items: center;
             opacity: 0;
-            transition: opacity 0.4s ease-in-out;
+            transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out; /* Added transform transition */
             z-index: 2;
-            transform: translateY(20px);
+            transform: translateY(10px); /* Subtle initial offset for hover effect */
         }
 
-        .gallery-item:hover .gallery-overlay {
+        .gallery-item-image-container:hover .gallery-overlay { /* Apply hover to image container */
             opacity: 1;
             transform: translateY(0);
         }
 
-        .gallery-overlay h3 {
+        .gallery-overlay i { /* Styles for icon inside overlay */
             color: var(--white-color);
-            text-align: center;
-            padding: 0 15px;
+            font-size: 2.5rem; 
+            opacity: 0.8;
             transform: scale(0.9);
-            transition: transform 0.4s ease-in-out 0.1s;
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
         }
-
-        .gallery-item:hover .gallery-overlay h3 {
+        
+        .gallery-item-image-container:hover .gallery-overlay i {
+            opacity: 1;
             transform: scale(1);
         }
+        
+        .gallery-item-title { /* Style for the always-visible title */
+            text-align: center;
+            margin-top: 12px; /* Space between image and title */
+            padding: 5px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+        /* MODIFICATION END: Styles for Gallery Item Structure */
+
 
         /* About Us Section */
         .about {
@@ -805,7 +826,10 @@
             }
 
             .gallery-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: 1fr; /* Single column on small screens */
+            }
+             .gallery-item-title {
+                font-size: 0.9rem; /* Slightly smaller title on mobile */
             }
 
             .contact-wrapper {
@@ -1025,11 +1049,11 @@
 
     <!-- Lightbox HTML -->
     <div id="lightbox" class="lightbox-container">
-        <span class="lightbox-close-btn">&times;</span>
+        <span class="lightbox-close-btn">×</span>
         <div class="lightbox-content-wrapper">
             <img class="lightbox-image" id="lightboxImage" src="" alt="Enlarged furniture">
-            <a class="lightbox-nav lightbox-prev-btn">&#10094;</a>
-            <a class="lightbox-nav lightbox-next-btn">&#10095;</a>
+            <a class="lightbox-nav lightbox-prev-btn">❮</a>
+            <a class="lightbox-nav lightbox-next-btn">❯</a>
         </div>
         <div class="lightbox-caption" id="lightboxCaption">Image caption</div>
     </div>
@@ -1119,17 +1143,17 @@
                 {
                     id: "wooden-ceiling",
                     displayName: "Wooden Ceiling",
-                    images: ["images/Furniture1.jpg"]
+                    images: ["images/Furniture1.jpg"] // Placeholder, update with actual images
                 },
                 {
                     id: "kitchen",
                     displayName: "Kitchen",
-                    images: ["images/Furniture1.jpg"]
+                    images: ["images/Furniture1.jpg"] // Placeholder
                 },
                 {
                     id: "cupboard",
                     displayName: "Cupboard",
-                    images: ["images/Furniture1.jpg"]
+                    images: ["images/Furniture1.jpg"] // Placeholder
                 },
                 {
                     id: "furniture",
@@ -1148,18 +1172,26 @@
 
             let currentCategoryImages = [];
             let currentImageIndex = 0;
-            let categorySlideshowIntervals = [];
+            let categorySlideshowIntervals = []; // Clear this if repopulating, but populateGallery clears grid first
 
             function populateGallery() {
                 if (!galleryGrid) return;
-                galleryGrid.innerHTML = '';
+                galleryGrid.innerHTML = ''; // Clear existing items
+                
+                // Clear any existing slideshow intervals
+                categorySlideshowIntervals.forEach(clearInterval);
+                categorySlideshowIntervals = [];
 
                 galleryCategories.forEach((category, categoryIndex) => {
+                    // MODIFICATION START: Gallery item structure change
                     const item = document.createElement('div');
                     item.className = 'gallery-item animate-on-scroll scale-up';
                     item.style.transitionDelay = `${categoryIndex * 0.05}s`;
-                    item.dataset.categoryId = category.id;
+                    // item.dataset.categoryId = category.id; // Not strictly needed on 'item' if click is on imageContainer
 
+                    const imageContainer = document.createElement('div');
+                    imageContainer.className = 'gallery-item-image-container';
+                    
                     const slider = document.createElement('div');
                     slider.className = 'gallery-image-slider';
 
@@ -1172,28 +1204,37 @@
                         }
                         slider.appendChild(img);
                     });
-                    item.appendChild(slider);
+                    imageContainer.appendChild(slider);
 
                     const overlay = document.createElement('div');
                     overlay.className = 'gallery-overlay';
-                    const h3 = document.createElement('h3');
-                    h3.textContent = category.displayName;
-                    overlay.appendChild(h3);
-                    item.appendChild(overlay);
+                    const viewIcon = document.createElement('i'); // Added icon
+                    viewIcon.className = 'fas fa-search-plus'; 
+                    overlay.appendChild(viewIcon);
+                    imageContainer.appendChild(overlay);
+                    
+                    item.appendChild(imageContainer);
+
+                    const titleDiv = document.createElement('div');
+                    titleDiv.className = 'gallery-item-title';
+                    titleDiv.textContent = category.displayName;
+                    item.appendChild(titleDiv);
+                    // MODIFICATION END: Gallery item structure change
 
                     galleryGrid.appendChild(item);
 
                     startItemSlideshow(slider, category.images.length);
 
-                    item.addEventListener('click', () => {
+                    // MODIFICATION: Attach click listener to imageContainer for opening lightbox
+                    imageContainer.addEventListener('click', () => {
                         openLightbox(category.id, 0);
                     });
                 });
 
-                initializeScrollAnimations();
+                initializeScrollAnimations(); // Re-initialize if items are dynamically added and might not be caught otherwise
             }
 
-            function startItemSlideshow(sliderElement, numImages, intervalTime = 2000) {
+            function startItemSlideshow(sliderElement, numImages, intervalTime = 2500) { // Slightly increased interval
                 if (numImages <= 1) return;
 
                 const images = sliderElement.querySelectorAll('img');
@@ -1213,7 +1254,7 @@
 
                 currentCategoryImages = category.images;
                 currentImageIndex = imgIndex;
-                document.body.style.overflow = 'hidden';
+                document.body.style.overflow = 'hidden'; // Prevent body scroll when lightbox is open
                 updateLightboxImage();
                 lightbox.classList.add('active');
             }
@@ -1221,7 +1262,7 @@
             function closeLightbox() {
                 if (!lightbox) return;
                 lightbox.classList.remove('active');
-                document.body.style.overflow = 'auto';
+                document.body.style.overflow = 'auto'; // Restore body scroll
             }
 
             function updateLightboxImage() {
@@ -1229,8 +1270,20 @@
 
                 lightboxImage.src = currentCategoryImages[currentImageIndex];
                 lightboxImage.alt = `Image ${currentImageIndex + 1} of ${currentCategoryImages.length}`;
-                const currentCategory = galleryCategories.find(cat => cat.images === currentCategoryImages);
-                lightboxCaption.textContent = currentCategory ? `${currentCategory.displayName} - Image ${currentImageIndex + 1} of ${currentCategoryImages.length}` : `Image ${currentImageIndex + 1}`;
+                const currentCategory = galleryCategories.find(cat => cat.images === currentCategoryImages); // This might be tricky if multiple categories share image arrays
+                // Safer: find category by id that was passed to openLightbox
+                const categoryForCaption = galleryCategories.find(cat => cat.id === currentCategoryImages.categoryId); // Need to store categoryId with images if using this method
+                                                                                                                       // Or, find by matching currentCategoryImages array content if unique.
+                                                                                                                       // For now, the existing method is likely fine given the structure.
+                
+                // Simplified caption logic:
+                let captionText = `Image ${currentImageIndex + 1} of ${currentCategoryImages.length}`;
+                const originalCategory = galleryCategories.find(cat => cat.images.includes(currentCategoryImages[currentImageIndex]));
+                if (originalCategory) {
+                     captionText = `${originalCategory.displayName} - Image ${currentImageIndex + 1} of ${currentCategoryImages.length}`;
+                }
+                lightboxCaption.textContent = captionText;
+
 
                 const showNav = currentCategoryImages.length > 1;
                 lightboxPrevBtn.style.display = showNav ? 'block' : 'none';
@@ -1238,11 +1291,13 @@
             }
 
             function showNextImage() {
+                if (currentCategoryImages.length <=1) return; // Guard against single image arrays
                 currentImageIndex = (currentImageIndex + 1) % currentCategoryImages.length;
                 updateLightboxImage();
             }
 
             function showPrevImage() {
+                if (currentCategoryImages.length <=1) return; // Guard against single image arrays
                 currentImageIndex = (currentImageIndex - 1 + currentCategoryImages.length) % currentCategoryImages.length;
                 updateLightboxImage();
             }
@@ -1255,9 +1310,9 @@
                 if (lightbox && lightbox.classList.contains('active')) {
                     if (e.key === 'Escape') {
                         closeLightbox();
-                    } else if (e.key === 'ArrowLeft') {
+                    } else if (e.key === 'ArrowLeft' && currentCategoryImages.length > 1) {
                         showPrevImage();
-                    } else if (e.key === 'ArrowRight') {
+                    } else if (e.key === 'ArrowRight' && currentCategoryImages.length > 1) {
                         showNextImage();
                     }
                 }
@@ -1265,7 +1320,8 @@
 
             if (lightbox) {
                 lightbox.addEventListener('click', (e) => {
-                    if (e.target === lightbox) {
+                    // Close lightbox if clicking on the semi-transparent background, but not on content wrapper
+                    if (e.target === lightbox) { 
                         closeLightbox();
                     }
                 });
@@ -1288,16 +1344,16 @@
             }
 
             function handleSwipe() {
-                if (currentCategoryImages.length <= 1) return;
-                const swipeThreshold = 50;
-                if (touchendX < touchstartX - swipeThreshold) {
+                if (currentCategoryImages.length <= 1) return; // No swipe for single images
+                const swipeThreshold = 50; // Minimum distance for a swipe
+                if (touchendX < touchstartX - swipeThreshold) { // Swiped left
                     showNextImage();
                 }
-                if (touchendX > touchstartX + swipeThreshold) {
+                if (touchendX > touchstartX + swipeThreshold) { // Swiped right
                     showPrevImage();
                 }
             }
-
+            
             function initializeScrollAnimations() {
                 const animatedElements = document.querySelectorAll('.animate-on-scroll');
                 if ("IntersectionObserver" in window) {
@@ -1305,19 +1361,26 @@
                         entries.forEach(entry => {
                             if (entry.isIntersecting) {
                                 entry.target.classList.add('animated');
-                                observerInstance.unobserve(entry.target);
+                                // observerInstance.unobserve(entry.target); // Keep observing if you want animations to replay on scroll up/down
+                            } else {
+                                // Optionally remove 'animated' if you want elements to re-animate when scrolling back into view
+                                // entry.target.classList.remove('animated');
                             }
                         });
-                    }, { threshold: 0.1 });
-                    animatedElements.forEach(el => observer.observe(el));
+                    }, { threshold: 0.1 }); // Adjust threshold as needed
+                    animatedElements.forEach(el => {
+                        // Reset if already animated to allow re-triggering if observer is re-used.
+                        // el.classList.remove('animated'); 
+                        observer.observe(el);
+                    });
                 } else {
                     // Fallback for browsers that don't support IntersectionObserver
-                    // Add 'animated' class to all elements at once, or implement a scroll listener
                     animatedElements.forEach(el => el.classList.add('animated'));
                 }
             }
 
-            populateGallery();
+            populateGallery(); // Initial population of the gallery
+            // initializeScrollAnimations(); // Called within populateGallery now for dynamic content
 
         }); 
     </script>

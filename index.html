@@ -129,7 +129,7 @@
         }
 
         .logo:hover h1 {
-            color: Wvar(--accent-color);
+            color: var(--accent-color);
         }
 
         .nav-links {
@@ -1086,19 +1086,17 @@
 
             // --- GALLERY AND LIGHTBOX CODE ---
 
-            // Define gallery categories with actual image filenames
-            // You need to replace the imageFiles arrays with the actual filenames from each folder
-            // Example: If 'Bed' folder has 'modern_bed_01.jpg', 'classic_bed.jpg', etc., list them here
+            // Integrated galleryCategories from JSON
             const galleryCategories = [
                 {
                     id: "bed",
                     displayName: "Bed",
                     folderName: "Bed",
                     imageFiles: [
-                        "modern_bed_01.jpg", // Replace with actual filenames
-                        "classic_bed.jpg",
-                        "king_size_bed.png"
-                        // Add all image filenames from the 'Bed' folder
+                        "1.jpg",
+                        "2.jpg",
+                        "3.jpg",
+                        "4.jpg"
                     ]
                 },
                 {
@@ -1106,9 +1104,10 @@
                     displayName: "TV Unit",
                     folderName: "TV_Unit",
                     imageFiles: [
-                        "tv_unit_modern.jpg",
-                        "tv_stand_wood.jpg"
-                        // Add all image filenames from the 'TV_Unit' folder
+                        "1.jpg",
+                        "2.jpg",
+                        "3.jpg",
+                        "4.jpg"
                     ]
                 },
                 {
@@ -1116,8 +1115,10 @@
                     displayName: "Dining Table",
                     folderName: "Dining_Table",
                     imageFiles: [
-                        "dining_table_round.jpg"
-                        // Add all image filenames from the 'Dining_Table' folder
+                        "1.jpg",
+                        "2.jpg",
+                        "3.jpg",
+                        "4.jpg"
                     ]
                 },
                 {
@@ -1125,11 +1126,10 @@
                     displayName: "Sofa",
                     folderName: "Sofa",
                     imageFiles: [
-                        "leather_sofa.jpg",
-                        "fabric_sofa_blue.jpg",
-                        "corner_sofa.jpg",
-                        "sofa_set_modern.png"
-                        // Add all image filenames from the 'Sofa' folder
+                        "1.jpg",
+                        "2.jpg",
+                        "3.jpg",
+                        "4.jpg"
                     ]
                 },
                 {
@@ -1137,9 +1137,10 @@
                     displayName: "Wooden Ceiling",
                     folderName: "Wooden_Ceiling",
                     imageFiles: [
-                        "ceiling_design_01.jpg",
-                        "ceiling_rustic.jpg"
-                        // Add all image filenames from the 'Wooden_Ceiling' folder
+                        "1.jpg",
+                        "2.jpg",
+                        "3.jpg",
+                        "4.jpg"
                     ]
                 },
                 {
@@ -1147,10 +1148,10 @@
                     displayName: "Kitchen",
                     folderName: "Kitchen",
                     imageFiles: [
-                        "modular_kitchen_01.jpg",
-                        "kitchen_cabinets.jpg",
-                        "kitchen_island.png"
-                        // Add all image filenames from the 'Kitchen' folder
+                        "1.jpg",
+                        "2.jpg",
+                        "3.jpg",
+                        "4.jpg"
                     ]
                 },
                 {
@@ -1158,20 +1159,21 @@
                     displayName: "Cupboard",
                     folderName: "Cupboard",
                     imageFiles: [
-                        "wardrobe_sliding.jpg",
-                        "cupboard_wooden.jpg"
-                        // Add all image filenames from the 'Cupboard' folder
+                        "1.jpg",
+                        "2.jpg",
+                        "3.jpg",
+                        "4.jpg"
                     ]
                 },
                 {
                     id: "furniture",
-                    displayName: "Assorted Furniture",
+                    displayName: "Furniture",
                     folderName: "Furniture",
                     imageFiles: [
-                        "coffee_table.jpg",
-                        "bookshelf.jpg",
-                        "desk_modern.jpg"
-                        // Add all image filenames from the 'Furniture' folder
+                        "1.jpg",
+                        "2.jpg",
+                        "3.jpg",
+                        "4.jpg"
                     ]
                 }
             ];
@@ -1217,7 +1219,6 @@
                         img.alt = `${category.displayName} - Image ${imgIndex + 1}`;
                         img.onerror = () => {
                             console.error(`Error loading image: ${img.src}`);
-                            // Optionally hide or remove broken images
                             img.style.display = 'none';
                         };
                         if (imgIndex === 0) {
@@ -1269,7 +1270,7 @@
                 const category = galleryCategories.find(cat => cat.id === categoryId);
                 if (!category || !lightbox || !category.imageFiles || category.imageFiles.length === 0) return;
 
-                currentLightboxImagePaths = category.imageFiles.map(fileName => `images/${category.folderName}/${fileName}`);
+                currentLight caveatImagePaths = category.imageFiles.map(fileName => `images/${category.folderName}/${fileName}`);
                 currentImageIndex = imgIndex;
                 
                 document.body.style.overflow = 'hidden';

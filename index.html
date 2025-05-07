@@ -33,7 +33,6 @@
             color: var(--text-color);
             line-height: 1.6;
             overflow-x: hidden;
-            /* Prevent horizontal scrollbars from animations */
         }
 
         .hindi-text {
@@ -87,11 +86,9 @@
         }
 
         .animated {
-            /* Class added by JS when element is intersecting */
             opacity: 1;
             transform: translateY(0) translateX(0) scale(1);
         }
-
 
         /* Navigation */
         header {
@@ -115,10 +112,6 @@
             transition: transform 0.3s ease;
         }
 
-        .logo:hover {
-            /* transform: scale(1.03); */
-        }
-
         .logo img {
             height: 40px;
             margin-right: 10px;
@@ -136,9 +129,8 @@
         }
 
         .logo:hover h1 {
-            color: var(--accent-color);
+            color: Wvar(--accent-color);
         }
-
 
         .nav-links {
             display: flex;
@@ -156,7 +148,6 @@
             transition: color 0.3s;
             position: relative;
             padding-bottom: 5px;
-            /* Space for underline */
         }
 
         .nav-links a::after {
@@ -195,7 +186,6 @@
             padding: 120px 0;
             text-align: center;
             overflow: hidden;
-            /* To contain slide-in animations */
         }
 
         .hero h1 {
@@ -207,7 +197,7 @@
         .hero p {
             font-size: 1.2rem;
             max-width: 600px;
-            margin: 0 auto 50px; /* Increased bottom margin */
+            margin: 0 auto 50px;
         }
 
         .btn {
@@ -253,18 +243,14 @@
             left: 50%;
             transform: translateX(-50%);
             width: 0;
-            /* Initial width for animation */
             height: 3px;
             background-color: var(--secondary-color);
             transition: width 0.5s ease-out 0.3s;
-            /* Delay underline animation */
         }
 
         .section-title h2.animated::after {
             width: 80px;
-            /* Target width */
         }
-
 
         .services-grid {
             display: grid;
@@ -290,7 +276,6 @@
             transform: translateY(-10px) scale(1.02) !important;
         }
 
-
         .service-icon {
             font-size: 2.5rem;
             color: var(--primary-color);
@@ -314,10 +299,10 @@
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px; 
+            gap: 30px;
         }
 
-        .gallery-item { 
+        .gallery-item {
             display: flex;
             flex-direction: column;
             transition: opacity var(--animation-duration) var(--animation-timing-function),
@@ -328,11 +313,11 @@
             position: relative;
             overflow: hidden;
             border-radius: 8px;
-            aspect-ratio: 1 / 1; 
+            aspect-ratio: 1 / 1;
             width: 100%;
-            cursor: pointer; 
+            cursor: pointer;
         }
-        
+
         .gallery-image-slider {
             width: 100%;
             height: 100%;
@@ -361,44 +346,43 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.6); 
-            display: flex; 
+            background-color: rgba(0, 0, 0, 0.6);
+            display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             opacity: 0;
-            transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out; 
+            transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
             z-index: 2;
-            transform: translateY(10px); 
+            transform: translateY(10px);
         }
 
-        .gallery-item-image-container:hover .gallery-overlay { 
+        .gallery-item-image-container:hover .gallery-overlay {
             opacity: 1;
             transform: translateY(0);
         }
 
-        .gallery-overlay i { 
+        .gallery-overlay i {
             color: var(--white-color);
-            font-size: 2.5rem; 
+            font-size: 2.5rem;
             opacity: 0.8;
             transform: scale(0.9);
             transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
         }
-        
+
         .gallery-item-image-container:hover .gallery-overlay i {
             opacity: 1;
             transform: scale(1);
         }
-        
-        .gallery-item-title { 
+
+        .gallery-item-title {
             text-align: center;
-            margin-top: 12px; 
+            margin-top: 12px;
             padding: 5px;
             font-size: 1rem;
             font-weight: 600;
             color: var(--primary-color);
         }
-
 
         /* About Us Section */
         .about {
@@ -530,7 +514,6 @@
         .footer-links {
             transition: opacity var(--animation-duration) var(--animation-timing-function), transform var(--animation-duration) var(--animation-timing-function);
         }
-
 
         .footer-logo h2 {
             font-size: 1.5rem;
@@ -703,7 +686,6 @@
             font-size: 1rem;
         }
 
-
         /* Responsive Design */
         @media (max-width: 992px) {
             .about-content {
@@ -729,7 +711,6 @@
             .animated.slide-in-right {
                 transform: translateY(0);
             }
-
 
             .footer-content {
                 grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -770,7 +751,6 @@
                 left: 50%;
                 transform: translateX(-50%);
             }
-
 
             .hero h1 {
                 font-size: 2rem;
@@ -819,10 +799,11 @@
             }
 
             .gallery-grid {
-                grid-template-columns: 1fr; /* Single column on small screens */
+                grid-template-columns: 1fr;
             }
-             .gallery-item-title {
-                font-size: 0.9rem; /* Slightly smaller title on mobile */
+
+            .gallery-item-title {
+                font-size: 0.9rem;
             }
 
             .contact-wrapper {
@@ -848,7 +829,7 @@
         <div class="container">
             <nav class="navbar">
                 <div class="logo">
-                    <img src="images/Khati_Raj.png" alt="KhatiRaj Logo"> <!-- Ensure this path is correct -->
+                    <img src="images/Khati_Raj.png" alt="KhatiRaj Logo">
                 </div>
                 <button class="hamburger" id="hamburger">
                     <i class="fas fa-bars"></i>
@@ -1040,11 +1021,11 @@
 
     <!-- Lightbox HTML -->
     <div id="lightbox" class="lightbox-container">
-        <span class="lightbox-close-btn">×</span>
+        <span class="lightbox-close-btn">&times;</span>
         <div class="lightbox-content-wrapper">
             <img class="lightbox-image" id="lightboxImage" src="" alt="Enlarged furniture">
-            <a class="lightbox-nav lightbox-prev-btn">❮</a>
-            <a class="lightbox-nav lightbox-next-btn">❯</a>
+            <a class="lightbox-nav lightbox-prev-btn">&#10094;</a>
+            <a class="lightbox-nav lightbox-next-btn">&#10095;</a>
         </div>
         <div class="lightbox-caption" id="lightboxCaption">Image caption</div>
     </div>
@@ -1105,61 +1086,95 @@
 
             // --- GALLERY AND LIGHTBOX CODE ---
 
-            // MODIFICATION START: Updated galleryCategories structure
-            // IMPORTANT: Update the imageFiles arrays with your actual image filenames for each category.
-            // The folderName must exactly match the folder names inside your 'images/' directory.
+            // Define gallery categories with actual image filenames
+            // You need to replace the imageFiles arrays with the actual filenames from each folder
+            // Example: If 'Bed' folder has 'modern_bed_01.jpg', 'classic_bed.jpg', etc., list them here
             const galleryCategories = [
                 {
                     id: "bed",
                     displayName: "Bed",
-                    folderName: "Bed", // Name of the folder in 'images/'
-                    imageFiles: ["Bed1.jpg", "Bed2.jpg", "Bed3.jpg"] // LIST YOUR FILENAMES HERE
+                    folderName: "Bed",
+                    imageFiles: [
+                        "modern_bed_01.jpg", // Replace with actual filenames
+                        "classic_bed.jpg",
+                        "king_size_bed.png"
+                        // Add all image filenames from the 'Bed' folder
+                    ]
                 },
                 {
                     id: "tv-unit",
                     displayName: "TV Unit",
                     folderName: "TV_Unit",
-                    imageFiles: ["Tv1.jpg", "Tv2.jpg"] // LIST YOUR FILENAMES HERE
+                    imageFiles: [
+                        "tv_unit_modern.jpg",
+                        "tv_stand_wood.jpg"
+                        // Add all image filenames from the 'TV_Unit' folder
+                    ]
                 },
                 {
                     id: "dining-table",
                     displayName: "Dining Table",
                     folderName: "Dining_Table",
-                    imageFiles: ["Dining_Table1.jpg"] // LIST YOUR FILENAMES HERE
+                    imageFiles: [
+                        "dining_table_round.jpg"
+                        // Add all image filenames from the 'Dining_Table' folder
+                    ]
                 },
                 {
                     id: "sofa",
                     displayName: "Sofa",
                     folderName: "Sofa",
-                    imageFiles: ["Sofa1.jpg", "Sofa2.jpg", "Sofa3.jpg", "Sofa4.jpg"] // LIST YOUR FILENAMES HERE
+                    imageFiles: [
+                        "leather_sofa.jpg",
+                        "fabric_sofa_blue.jpg",
+                        "corner_sofa.jpg",
+                        "sofa_set_modern.png"
+                        // Add all image filenames from the 'Sofa' folder
+                    ]
                 },
                 {
                     id: "wooden-ceiling",
                     displayName: "Wooden Ceiling",
                     folderName: "Wooden_Ceiling",
-                    imageFiles: ["ceiling1.jpg", "ceiling2.jpg"] // LIST YOUR FILENAMES HERE (Example)
+                    imageFiles: [
+                        "ceiling_design_01.jpg",
+                        "ceiling_rustic.jpg"
+                        // Add all image filenames from the 'Wooden_Ceiling' folder
+                    ]
                 },
                 {
                     id: "kitchen",
                     displayName: "Kitchen",
                     folderName: "Kitchen",
-                    imageFiles: ["kitchen1.jpg", "kitchen2.jpg", "kitchen3.jpg"] // LIST YOUR FILENAMES HERE (Example)
+                    imageFiles: [
+                        "modular_kitchen_01.jpg",
+                        "kitchen_cabinets.jpg",
+                        "kitchen_island.png"
+                        // Add all image filenames from the 'Kitchen' folder
+                    ]
                 },
                 {
                     id: "cupboard",
                     displayName: "Cupboard",
                     folderName: "Cupboard",
-                    imageFiles: ["cupboard1.jpg", "cupboard2.png"] // LIST YOUR FILENAMES HERE (Example)
+                    imageFiles: [
+                        "wardrobe_sliding.jpg",
+                        "cupboard_wooden.jpg"
+                        // Add all image filenames from the 'Cupboard' folder
+                    ]
                 },
                 {
-                    id: "furniture", // General/Assorted furniture
+                    id: "furniture",
                     displayName: "Assorted Furniture",
-                    folderName: "Furniture", // Folder for general items
-                    imageFiles: ["Furniture1.jpg", "Furniture2.jpg", "Furniture3.jpg"] // LIST YOUR FILENAMES HERE
+                    folderName: "Furniture",
+                    imageFiles: [
+                        "coffee_table.jpg",
+                        "bookshelf.jpg",
+                        "desk_modern.jpg"
+                        // Add all image filenames from the 'Furniture' folder
+                    ]
                 }
             ];
-            // MODIFICATION END: Updated galleryCategories structure
-
 
             const galleryGrid = document.querySelector('.gallery-grid');
             const lightbox = document.getElementById('lightbox');
@@ -1169,13 +1184,13 @@
             const lightboxPrevBtn = document.querySelector('.lightbox-prev-btn');
             const lightboxNextBtn = document.querySelector('.lightbox-next-btn');
 
-            let currentLightboxImagePaths = []; // Stores full paths for lightbox
+            let currentLightboxImagePaths = [];
             let currentImageIndex = 0;
             let categorySlideshowIntervals = [];
 
             function populateGallery() {
                 if (!galleryGrid) return;
-                galleryGrid.innerHTML = ''; 
+                galleryGrid.innerHTML = '';
                 
                 categorySlideshowIntervals.forEach(clearInterval);
                 categorySlideshowIntervals = [];
@@ -1183,7 +1198,7 @@
                 galleryCategories.forEach((category, categoryIndex) => {
                     if (!category.imageFiles || category.imageFiles.length === 0) {
                         console.warn(`No image files listed for category: ${category.displayName}`);
-                        return; // Skip this category if no images are listed
+                        return;
                     }
 
                     const item = document.createElement('div');
@@ -1196,18 +1211,14 @@
                     const slider = document.createElement('div');
                     slider.className = 'gallery-image-slider';
 
-                    // MODIFICATION: Construct image paths dynamically
                     category.imageFiles.forEach((imageFileName, imgIndex) => {
                         const img = document.createElement('img');
-                        // Construct the path: images/FolderName/imageFileName.jpg
                         img.src = `images/${category.folderName}/${imageFileName}`;
                         img.alt = `${category.displayName} - Image ${imgIndex + 1}`;
-                        // Error handling for images (optional but good practice)
-                        img.onerror = () => { 
+                        img.onerror = () => {
                             console.error(`Error loading image: ${img.src}`);
-                            // Optionally display a placeholder or remove the broken image element
-                            // img.src = 'images/placeholder.jpg'; // if you have a placeholder
-                            // img.parentElement.removeChild(img); 
+                            // Optionally hide or remove broken images
+                            img.style.display = 'none';
                         };
                         if (imgIndex === 0) {
                             img.classList.add('active-slide');
@@ -1218,8 +1229,8 @@
 
                     const overlay = document.createElement('div');
                     overlay.className = 'gallery-overlay';
-                    const viewIcon = document.createElement('i'); 
-                    viewIcon.className = 'fas fa-search-plus'; 
+                    const viewIcon = document.createElement('i');
+                    viewIcon.className = 'fas fa-search-plus';
                     overlay.appendChild(viewIcon);
                     imageContainer.appendChild(overlay);
                     
@@ -1235,14 +1246,14 @@
                     startItemSlideshow(slider, category.imageFiles.length);
 
                     imageContainer.addEventListener('click', () => {
-                        openLightbox(category.id, 0); // Pass category ID
+                        openLightbox(category.id, 0);
                     });
                 });
 
-                initializeScrollAnimations(); 
+                initializeScrollAnimations();
             }
 
-            function startItemSlideshow(sliderElement, numImages, intervalTime = 2500) { 
+            function startItemSlideshow(sliderElement, numImages, intervalTime = 2500) {
                 if (numImages <= 1) return;
                 const images = sliderElement.querySelectorAll('img');
                 let currentIndex = 0;
@@ -1258,22 +1269,21 @@
                 const category = galleryCategories.find(cat => cat.id === categoryId);
                 if (!category || !lightbox || !category.imageFiles || category.imageFiles.length === 0) return;
 
-                // MODIFICATION: Create full image paths for lightbox
                 currentLightboxImagePaths = category.imageFiles.map(fileName => `images/${category.folderName}/${fileName}`);
                 currentImageIndex = imgIndex;
                 
-                document.body.style.overflow = 'hidden'; 
-                updateLightboxImage(category.displayName); // Pass displayName for caption
+                document.body.style.overflow = 'hidden';
+                updateLightboxImage(category.displayName);
                 lightbox.classList.add('active');
             }
 
             function closeLightbox() {
                 if (!lightbox) return;
                 lightbox.classList.remove('active');
-                document.body.style.overflow = 'auto'; 
+                document.body.style.overflow = 'auto';
             }
 
-            function updateLightboxImage(categoryDisplayName) { // Added categoryDisplayName parameter
+            function updateLightboxImage(categoryDisplayName) {
                 if (currentLightboxImagePaths.length === 0 || !lightboxImage || !lightboxCaption || !lightboxPrevBtn || !lightboxNextBtn) return;
 
                 lightboxImage.src = currentLightboxImagePaths[currentImageIndex];
@@ -1284,21 +1294,20 @@
                 lightboxPrevBtn.style.display = showNav ? 'block' : 'none';
                 lightboxNextBtn.style.display = showNav ? 'block' : 'none';
             }
-            
+
             function showNextImage() {
-                if (currentLightboxImagePaths.length <= 1) return; 
+                if (currentLightboxImagePaths.length <= 1) return;
                 currentImageIndex = (currentImageIndex + 1) % currentLightboxImagePaths.length;
                 const category = galleryCategories.find(cat => cat.imageFiles.map(fn => `images/${cat.folderName}/${fn}`).includes(currentLightboxImagePaths[currentImageIndex]));
                 updateLightboxImage(category ? category.displayName : 'Image');
             }
 
             function showPrevImage() {
-                if (currentLightboxImagePaths.length <= 1) return; 
+                if (currentLightboxImagePaths.length <= 1) return;
                 currentImageIndex = (currentImageIndex - 1 + currentLightboxImagePaths.length) % currentLightboxImagePaths.length;
                 const category = galleryCategories.find(cat => cat.imageFiles.map(fn => `images/${cat.folderName}/${fn}`).includes(currentLightboxImagePaths[currentImageIndex]));
                 updateLightboxImage(category ? category.displayName : 'Image');
             }
-
 
             if (lightboxCloseBtn) lightboxCloseBtn.addEventListener('click', closeLightbox);
             if (lightboxPrevBtn) lightboxPrevBtn.addEventListener('click', showPrevImage);
@@ -1318,7 +1327,7 @@
 
             if (lightbox) {
                 lightbox.addEventListener('click', (e) => {
-                    if (e.target === lightbox) { 
+                    if (e.target === lightbox) {
                         closeLightbox();
                     }
                 });
@@ -1340,16 +1349,16 @@
             }
 
             function handleSwipe() {
-                if (currentLightboxImagePaths.length <= 1) return; 
-                const swipeThreshold = 50; 
-                if (touchendX < touchstartX - swipeThreshold) { 
+                if (currentLightboxImagePaths.length <= 1) return;
+                const swipeThreshold = 50;
+                if (touchendX < touchstartX - swipeThreshold) {
                     showNextImage();
                 }
-                if (touchendX > touchstartX + swipeThreshold) { 
+                if (touchendX > touchstartX + swipeThreshold) {
                     showPrevImage();
                 }
             }
-            
+
             function initializeScrollAnimations() {
                 const animatedElements = document.querySelectorAll('.animate-on-scroll');
                 if ("IntersectionObserver" in window) {
@@ -1359,7 +1368,7 @@
                                 entry.target.classList.add('animated');
                             }
                         });
-                    }, { threshold: 0.1 }); 
+                    }, { threshold: 0.1 });
                     animatedElements.forEach(el => {
                         observer.observe(el);
                     });
@@ -1370,7 +1379,7 @@
 
             populateGallery();
 
-        }); 
+        });
     </script>
 </body>
 

@@ -14,32 +14,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.querySelectorAll('.nav-links a').forEach(link => {
         link.addEventListener('click', () => {
-            if (navLinks && navLinks.classList.contains('active')) {
+            if (navLinks.classList.contains('active')) {
                 navLinks.classList.remove('active');
-                if (hamburger) {
-                    hamburger.innerHTML = '<i class="fas fa-bars"></i>';
-                }
+                hamburger.innerHTML = '<i class="fas fa-bars"></i>';
             }
         });
     });
 
+    // Smooth Scroll for Anchor Links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
             const targetId = this.getAttribute('href');
             const targetElement = document.querySelector(targetId);
-
             if (targetElement) {
-                let offset = 70; // Default offset for sticky header
-                // Calculate header height dynamically if possible, or use fixed value
                 const header = document.querySelector('header');
-                if (header) {
-                    offset = header.offsetHeight > 0 ? header.offsetHeight : 70;
-                }
-
-                if (targetId === '#home') {
-                    offset = 0;
-                }
+                const offset = targetId === '#home' ? 0 : (header?.offsetHeight || 80);
                 window.scrollTo({
                     top: targetElement.offsetTop - offset,
                     behavior: 'smooth'
@@ -48,162 +38,55 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // Contact Form Validation
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
         contactForm.addEventListener('submit', (e) => {
             e.preventDefault();
-            alert('Thank you for your message! We will get back to you soon.');
-            contactForm.reset();
+            const name = contactForm.querySelector('input[type="text"]');
+            const phone = contactForm.querySelector('input[type="tel"]');
+            const message = contactForm.querySelector('textarea');
+            let isValid = true;
+
+            [name, phone, message].forEach(input => {
+                const formGroup = input.parentElement;
+                if (!input.value.trim()) {
+                    formGroup.classList.add('invalid');
+                    isValid = false;
+                } else {
+                    formGroup.classList.remove('invalid');
+                }
+            });
+
+            if (isValid) {
+                alert('Thank you for your message! We will get back to you soon.');
+                contactForm.reset();
+            }
+        });
+
+        // Real-time validation
+        contactForm.querySelectorAll('.form-control').forEach(input => {
+            input.addEventListener('input', () => {
+                const formGroup = input.parentElement;
+                if (input.value.trim()) {
+                    formGroup.classList.remove('invalid');
+                }
+            });
         });
     }
 
-    // --- GALLERY AND LIGHTBOX CODE ---
-
-    // Integrated galleryCategories from JSON
-    // If you want to load this from an external galleryCategories.json file,
-    // you would need to use fetch API here.
+    // Gallery and Lightbox
     const galleryCategories = [
-        {
-            id: "bed",
-            displayName: "Bed",
-            folderName: "Bed",
-            imageFiles: [
-                "1.jpg",
-                "2.jpg",
-                "3.jpg",
-                "4.jpg",
-                "5.jpg",
-                "6.jpg",
-                "7.jpg",
-                "8.jpg",
-                "9.jpg",
-                "10.jpg",
-                "11.jpg",
-                "12.jpg",
-                "13.jpg",
-                "14.jpg",
-                "15.jpg",
-                "16.jpg",
-                "17.jpg",
-                "18.jpg",
-                "19.jpg",
-                "20.jpg",
-                "21.jpg",
-                "22.jpg",
-                "23.jpg",
-                "24.jpg",
-                "25.jpg",
-                "26.jpg",
-                "27.jpg",
-                "28.jpg",
-                "29.jpg"
-            ]
-        },
-        {
-            id: "tv-unit",
-            displayName: "TV Unit",
-            folderName: "TV_Unit",
-            imageFiles: [
-                "1.jpg",
-                "2.jpg",
-                "3.jpg",
-                "4.jpg",
-                "5.jpg",
-                "6.jpg",
-                "7.jpg"
-            ]
-        },
-        {
-            id: "dining-table",
-            displayName: "Dining Table",
-            folderName: "Dining_Table",
-            imageFiles: [
-                "1.jpg"
-            ]
-        },
-        {
-            id: "sofa",
-            displayName: "Sofa",
-            folderName: "Sofa",
-            imageFiles: [
-                "1.jpg",
-                "2.jpg",
-                "3.jpg",
-                "4.jpg",
-                "5.jpg",
-                "6.jpg"
-            ]
-        },
-        {
-            id: "wooden-ceiling",
-            displayName: "Wooden Ceiling",
-            folderName: "Wooden_Ceiling",
-            imageFiles: [
-                "1.jpg",
-                "2.jpg",
-                "3.jpg",
-                "4.jpg",
-                "5.jpg",
-                "6.jpg",
-                "7.jpg",
-                "8.jpg",
-                "9.jpg",
-                "10.jpg",
-                "11.jpg"
-            ]
-        },
-        {
-            id: "kitchen",
-            displayName: "Kitchen",
-            folderName: "Kitchen",
-            imageFiles: [
-                "1.jpg",
-                "2.jpg",
-                "3.jpg",
-                "4.jpg"
-            ]
-        },
-        {
-            id: "cupboard",
-            displayName: "Cupboard",
-            folderName: "Cupboard",
-            imageFiles: [
-                "1.jpg",
-                "2.jpg",
-                "3.jpg",
-                "4.jpg",
-                "5.jpg",
-                "6.jpg",
-                "7.jpg",
-                "8.jpg",
-                "9.jpg"
-            ]
-        },
-        {
-            id: "pataisan",
-            displayName: "Pataisan",
-            folderName: "Pataisan",
-            imageFiles: [
-                "1.jpg",
-                "2.jpg",
-                "3.jpg",
-                "4.jpg",
-                "5.jpg",
-                "6.jpg",
-                "7.jpg"
-            ]
-        },
-        {
-            id: "furniture",
-            displayName: "Furniture",
-            folderName: "Furniture",
-            imageFiles: [
-                "1.jpg",
-                "2.jpg",
-                "3.jpg",
-                "4.jpg"
-            ]
-        }
+        { id: "all", displayName: "All", folderName: "", imageFiles: [] }, // Added "All" category
+        { id: "bed", displayName: "Bed", folderName: "Bed", imageFiles: ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg", "8.jpg", "9.jpg", "10.jpg", "11.jpg", "12.jpg", "13.jpg", "14.jpg", "15.jpg", "16.jpg", "17.jpg", "18.jpg", "19.jpg", "20.jpg", "21.jpg", "22.jpg", "23.jpg", "24.jpg", "25.jpg", "26.jpg", "27.jpg", "28.jpg", "29.jpg"] },
+        { id: "tv-unit", displayName: "TV Unit", folderName: "TV_Unit", imageFiles: ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg"] },
+        { id: "dining-table", displayName: "Dining Table", folderName: "Dining_Table", imageFiles: ["1.jpg"] },
+        { id: "sofa", displayName: "Sofa", folderName: "Sofa", imageFiles: ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg"] },
+        { id: "wooden-ceiling", displayName: "Wooden Ceiling", folderName: "Wooden_Ceiling", imageFiles: ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg", "8.jpg", "9.jpg", "10.jpg", "11.jpg"] },
+        { id: "kitchen", displayName: "Kitchen", folderName: "Kitchen", imageFiles: ["1.jpg", "2.jpg", "3.jpg", "4.jpg"] },
+        { id: "cupboard", displayName: "Cupboard", folderName: "Cupboard", imageFiles: ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg", "8.jpg", "9.jpg"] },
+        { id: "pataisan", displayName: "Pataisan", folderName: "Pataisan", imageFiles: ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg"] },
+        { id: "furniture", displayName: "Furniture", folderName: "Furniture", imageFiles: ["1.jpg", "2.jpg", "3.jpg", "4.jpg"] }
     ];
 
     const galleryGrid = document.querySelector('.gallery-grid');
@@ -213,26 +96,55 @@ document.addEventListener('DOMContentLoaded', () => {
     const lightboxCloseBtn = document.querySelector('.lightbox-close-btn');
     const lightboxPrevBtn = document.querySelector('.lightbox-prev-btn');
     const lightboxNextBtn = document.querySelector('.lightbox-next-btn');
-
     let currentLightboxImagePaths = [];
     let currentImageIndex = 0;
     let categorySlideshowIntervals = [];
 
+    function createGalleryFilters() {
+        const filterContainer = document.createElement('div');
+        filterContainer.className = 'gallery-filter';
+        galleryCategories.forEach(category => {
+            const button = document.createElement('button');
+            button.textContent = category.displayName;
+            button.dataset.category = category.id;
+            if (category.id === 'all') button.classList.add('active');
+            button.addEventListener('click', () => {
+                document.querySelectorAll('.gallery-filter button').forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                filterGallery(category.id);
+            });
+            filterContainer.appendChild(button);
+        });
+        galleryGrid.parentElement.insertBefore(filterContainer, galleryGrid);
+    }
+
+    function filterGallery(categoryId) {
+        const items = document.querySelectorAll('.gallery-item');
+        items.forEach(item => {
+            const itemCategory = item.dataset.category;
+            if (categoryId === 'all' || itemCategory === categoryId) {
+                item.classList.remove('hidden');
+            } else {
+                item.classList.add('hidden');
+            }
+        });
+    }
+
     function populateGallery() {
         if (!galleryGrid) return;
         galleryGrid.innerHTML = '';
-
         categorySlideshowIntervals.forEach(clearInterval);
         categorySlideshowIntervals = [];
 
-        galleryCategories.forEach((category, categoryIndex) => {
-            if (!category.imageFiles || category.imageFiles.length === 0) {
-                console.warn(`No image files listed for category: ${category.displayName}`);
+        galleryCategories.slice(1).forEach((category, categoryIndex) => { // Skip "All" category
+            if (!category.imageFiles.length) {
+                console.warn(`No image files for category: ${category.displayName}`);
                 return;
             }
 
             const item = document.createElement('div');
             item.className = 'gallery-item animate-on-scroll scale-up';
+            item.dataset.category = category.id;
             item.style.transitionDelay = `${categoryIndex * 0.05}s`;
 
             const imageContainer = document.createElement('div');
@@ -245,14 +157,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 const img = document.createElement('img');
                 img.src = `images/${category.folderName}/${imageFileName}`;
                 img.alt = `${category.displayName} - Image ${imgIndex + 1}`;
+                img.loading = 'lazy'; // Lazy loading
                 img.onerror = () => {
-                    console.error(`Error loading image: ${img.src}. Ensure the path is correct and the image exists.`);
-                    // Optionally, display a placeholder or remove the image element
-                    img.style.display = 'none'; // Hide broken image
+                    console.error(`Error loading image: ${img.src}`);
+                    img.style.display = 'none';
                 };
-                if (imgIndex === 0) {
-                    img.classList.add('active-slide');
-                }
+                if (imgIndex === 0) img.classList.add('active-slide');
                 slider.appendChild(img);
             });
             imageContainer.appendChild(slider);
@@ -280,24 +190,24 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
-        initializeScrollAnimations(); // Make sure this is called after gallery items are added
+        initializeScrollAnimations();
     }
 
-    function startItemSlideshow(sliderElement, numImages, intervalTime = 2500) {
+    function startItemSlideshow(sliderElement, numImages, intervalTime = 3000) {
         if (numImages <= 1) return;
         const images = sliderElement.querySelectorAll('img');
         let currentIndex = 0;
         const intervalId = setInterval(() => {
-            if (images[currentIndex]) images[currentIndex].classList.remove('active-slide');
+            images[currentIndex].classList.remove('active-slide');
             currentIndex = (currentIndex + 1) % images.length;
-            if (images[currentIndex]) images[currentIndex].classList.add('active-slide');
+            images[currentIndex].classList.add('active-slide');
         }, intervalTime);
         categorySlideshowIntervals.push(intervalId);
     }
 
     function openLightbox(categoryId, imgIndex) {
         const category = galleryCategories.find(cat => cat.id === categoryId);
-        if (!category || !lightbox || !category.imageFiles || category.imageFiles.length === 0) return;
+        if (!category || !lightbox || !category.imageFiles.length) return;
 
         currentLightboxImagePaths = category.imageFiles.map(fileName => `images/${category.folderName}/${fileName}`);
         currentImageIndex = imgIndex;
@@ -314,7 +224,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function updateLightboxImage(categoryDisplayName) {
-        if (currentLightboxImagePaths.length === 0 || !lightboxImage || !lightboxCaption || !lightboxPrevBtn || !lightboxNextBtn) return;
+        if (!currentLightboxImagePaths.length || !lightboxImage || !lightboxCaption || !lightboxPrevBtn || !lightboxNextBtn) return;
 
         lightboxImage.src = currentLightboxImagePaths[currentImageIndex];
         lightboxImage.alt = `${categoryDisplayName} - Image ${currentImageIndex + 1} of ${currentLightboxImagePaths.length}`;
@@ -329,11 +239,10 @@ document.addEventListener('DOMContentLoaded', () => {
         if (currentLightboxImagePaths.length <= 1) return;
         currentImageIndex = (currentImageIndex + 1) % currentLightboxImagePaths.length;
         const currentCategory = galleryCategories.find(cat => {
-            // Find the category whose folderName matches the one in the current image path
             const pathParts = currentLightboxImagePaths[currentImageIndex].split('/');
             return pathParts.length > 1 && cat.folderName === pathParts[pathParts.length - 2];
         });
-        updateLightboxImage(currentCategory ? currentCategory.displayName : 'Image');
+        updateLightboxImage(currentCategory?.displayName || 'Image');
     }
 
     function showPrevImage() {
@@ -343,85 +252,73 @@ document.addEventListener('DOMContentLoaded', () => {
             const pathParts = currentLightboxImagePaths[currentImageIndex].split('/');
             return pathParts.length > 1 && cat.folderName === pathParts[pathParts.length - 2];
         });
-        updateLightboxImage(currentCategory ? currentCategory.displayName : 'Image');
+        updateLightboxImage(currentCategory?.displayName || 'Image');
     }
-
 
     if (lightboxCloseBtn) lightboxCloseBtn.addEventListener('click', closeLightbox);
     if (lightboxPrevBtn) lightboxPrevBtn.addEventListener('click', showPrevImage);
     if (lightboxNextBtn) lightboxNextBtn.addEventListener('click', showNextImage);
 
     document.addEventListener('keydown', (e) => {
-        if (lightbox && lightbox.classList.contains('active')) {
-            if (e.key === 'Escape') {
-                closeLightbox();
-            } else if (e.key === 'ArrowLeft' && currentLightboxImagePaths.length > 1) {
-                showPrevImage();
-            } else if (e.key === 'ArrowRight' && currentLightboxImagePaths.length > 1) {
-                showNextImage();
-            }
+        if (lightbox?.classList.contains('active')) {
+            if (e.key === 'Escape') closeLightbox();
+            else if (e.key === 'ArrowLeft' && currentLightboxImagePaths.length > 1) showPrevImage();
+            else if (e.key === 'ArrowRight' && currentLightboxImagePaths.length > 1) showNextImage();
         }
     });
 
-    if (lightbox) {
-        lightbox.addEventListener('click', (e) => {
-            if (e.target === lightbox) { // Close only if clicked on the background, not the image itself
-                closeLightbox();
-            }
-        });
-    }
+    lightbox?.addEventListener('click', (e) => {
+        if (e.target === lightbox) closeLightbox();
+    });
 
+    // Touch Swipe for Lightbox
     let touchstartX = 0;
     let touchendX = 0;
     const lightboxContentWrapper = document.querySelector('.lightbox-content-wrapper');
-
     if (lightboxContentWrapper) {
-        lightboxContentWrapper.addEventListener('touchstart', function (event) {
-            touchstartX = event.changedTouches[0].screenX;
+        lightboxContentWrapper.addEventListener('touchstart', (e) => {
+            touchstartX = e.changedTouches[0].screenX;
         }, { passive: true });
 
-        lightboxContentWrapper.addEventListener('touchend', function (event) {
-            touchendX = event.changedTouches[0].screenX;
-            handleSwipe();
+        lightboxContentWrapper.addEventListener('touchend', (e) => {
+            touchendX = e.changedTouches[0].screenX;
+            if (touchendX < touchstartX - 50) showNextImage();
+            if (touchendX > touchstartX + 50) showPrevImage();
         }, { passive: true });
     }
 
-    function handleSwipe() {
-        if (currentLightboxImagePaths.length <= 1) return;
-        const swipeThreshold = 50; // Minimum distance for a swipe
-        if (touchendX < touchstartX - swipeThreshold) {
-            showNextImage();
-        }
-        if (touchendX > touchstartX + swipeThreshold) {
-            showPrevImage();
-        }
-    }
-
-
+    // Scroll Animations
     function initializeScrollAnimations() {
         const animatedElements = document.querySelectorAll('.animate-on-scroll');
         if ("IntersectionObserver" in window) {
-            const observer = new IntersectionObserver((entries, observerInstance) => {
+            const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('animated');
-                        // Optionally unobserve after animation to save resources
-                        // observerInstance.unobserve(entry.target); 
                     }
                 });
-            }, { threshold: 0.1 }); // Trigger when 10% of the element is visible
-
-            animatedElements.forEach(el => {
-                observer.observe(el);
-            });
+            }, { threshold: 0.15 });
+            animatedElements.forEach(el => observer.observe(el));
         } else {
-            // Fallback for browsers that don't support IntersectionObserver
             animatedElements.forEach(el => el.classList.add('animated'));
         }
     }
 
-    // Initial population of gallery and animation setup
-    populateGallery();
-    // initializeScrollAnimations(); // This is now called at the end of populateGallery
+    // Back to Top Button
+    const backToTop = document.createElement('div');
+    backToTop.className = 'back-to-top';
+    backToTop.innerHTML = '<i class="fas fa-arrow-up"></i>';
+    document.body.appendChild(backToTop);
 
+    window.addEventListener('scroll', () => {
+        backToTop.classList.toggle('visible', window.scrollY > 300);
+    });
+
+    backToTop.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Initialize
+    createGalleryFilters();
+    populateGallery();
 });

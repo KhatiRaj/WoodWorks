@@ -19,8 +19,6 @@
             <nav class="navbar">
                 <div class="logo">
                     <img src="images/Khati_Raj.png" alt="KhatiRaj Logo">
-                    <!-- If you want the h1 back, you can add it here -->
-                    <!-- <h1>KhatiRaj</h1> -->
                 </div>
                 <button class="hamburger" id="hamburger">
                     <i class="fas fa-bars"></i>
@@ -214,11 +212,15 @@
     <div id="lightbox" class="lightbox-container">
         <span class="lightbox-close-btn">×</span>
         <div class="lightbox-content-wrapper">
+            <div class="lightbox-loader" id="lightboxLoader"></div> <!-- ADDED LOADER -->
             <img class="lightbox-image" id="lightboxImage" src="" alt="Enlarged furniture">
             <a class="lightbox-nav lightbox-prev-btn">❮</a>
             <a class="lightbox-nav lightbox-next-btn">❯</a>
         </div>
         <div class="lightbox-caption" id="lightboxCaption">Image caption</div>
+        <div class="lightbox-thumbnails" id="lightboxThumbnails">
+            <!-- Thumbnails will be populated here by JS -->
+        </div>
     </div>
 
     <script src="script.js"></script>

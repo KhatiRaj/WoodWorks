@@ -109,7 +109,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 "3.jpg",
                 "4.jpg",
                 "5.jpg",
-                "6.jpg"
+                "6.jpg",
+                "7.jpg"
             ]
         },
         {
@@ -145,7 +146,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 "5.jpg",
                 "6.jpg",
                 "7.jpg",
-                "8.jpg"
+                "8.jpg",
+                "9.jpg",
+                "10.jpg",
+                "11.jpg"
             ]
         },
         {
@@ -185,7 +189,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 "3.jpg",
                 "4.jpg",
                 "5.jpg",
-                "6.jpg"
+                "6.jpg",
+                "7.jpg"
             ]
         },
         {
@@ -195,7 +200,8 @@ document.addEventListener('DOMContentLoaded', () => {
             imageFiles: [
                 "1.jpg",
                 "2.jpg",
-                "3.jpg"
+                "3.jpg",
+                "4.jpg"
             ]
         }
     ];

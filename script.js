@@ -1,73 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // GSAP Hero Section Animations
-    gsap.fromTo(
-        ".hero",
-        { scale: 1.1, opacity: 0 },
-        { scale: 1, opacity: 1, duration: 2, ease: "power2.out" }
-    );
-    gsap.fromTo(
-        ".hero-headline",
-        { y: 50, opacity: 0 },
-        { y: 0, opacity: 1, duration: 1, ease: "power3.out", delay: 0.5 }
-    );
-    gsap.fromTo(
-        ".hero-subline",
-        { y: 50, opacity: 0 },
-        { y: 0, opacity: 1, duration: 1, ease: "power3.out", delay: 0.7 }
-    );
-    gsap.fromTo(
-        ".hero .btn",
-        { scale: 0.8, opacity: 0 },
-        { scale: 1, opacity: 1, duration: 0.8, ease: "back.out(1.7)", delay: 0.9 }
-    );
-
-    // Scroll-Triggered Animations for Sections
-    const sections = ["services", "gallery", "about", "contact"];
-    sections.forEach((section) => {
-        const sectionElement = document.querySelector(`#${section}`);
-        const title = sectionElement.querySelector(".section-title h2");
-        const cards = sectionElement.querySelectorAll(".service-card, .gallery-item, .about-image, .about-text, .contact-info, .contact-form");
-
-        gsap.from(title, {
-            scrollTrigger: {
-                trigger: sectionElement,
-                start: "top 80%",
-                toggleActions: "play none none none",
-            },
-            opacity: 0,
-            y: 30,
-            duration: 0.8,
-            ease: "power2.out",
-        });
-
-        cards.forEach((card, index) => {
-            gsap.from(card, {
-                scrollTrigger: {
-                    trigger: card,
-                    start: "top 85%",
-                    toggleActions: "play none none none",
-                },
-                opacity: 0,
-                x: index % 2 === 0 ? -50 : 50,
-                duration: 0.8,
-                ease: "power3.out",
-                delay: index * 0.2,
-            });
-        });
-    });
-
-    // Parallax Effect for Hero Background
-    gsap.to(".hero", {
-        scrollTrigger: {
-            trigger: ".hero",
-            start: "top top",
-            end: "bottom top",
-            scrub: true,
-        },
-        backgroundPosition: "50% 60%",
-        ease: "none",
-    });
-
     // Mobile Navigation Toggle
     const hamburger = document.getElementById('hamburger');
     const navLinks = document.getElementById('navLinks');
@@ -78,11 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
             hamburger.innerHTML = navLinks.classList.contains('active')
                 ? '<i class="fas fa-times"></i>'
                 : '<i class="fas fa-bars"></i>';
-            gsap.fromTo(
-                ".nav-links a",
-                { y: 20, opacity: 0 },
-                { y: 0, opacity: 1, duration: 0.5, stagger: 0.1, ease: "power2.out" }
-            );
         });
     }
 
@@ -104,7 +30,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const targetElement = document.querySelector(targetId);
 
             if (targetElement) {
-                let offset = 70;
+                let offset = 70; // Default offset for sticky header
+                // Calculate header height dynamically if possible, or use fixed value
                 const header = document.querySelector('header');
                 if (header) {
                     offset = header.offsetHeight > 0 ? header.offsetHeight : 70;
@@ -113,13 +40,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (targetId === '#home') {
                     offset = 0;
                 }
-                gsap.to(window, {
-                    scrollTo: {
-                        y: targetElement.offsetTop - offset,
-                        autoKill: false,
-                    },
-                    duration: 1,
-                    ease: "power2.out",
+                window.scrollTo({
+                    top: targetElement.offsetTop - offset,
+                    behavior: 'smooth'
                 });
             }
         });
@@ -134,65 +57,152 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Gallery and Lightbox Code
+    // --- GALLERY AND LIGHTBOX CODE ---
+
+    // Integrated galleryCategories from JSON
+    // If you want to load this from an external galleryCategories.json file,
+    // you would need to use fetch API here.
     const galleryCategories = [
         {
             id: "bed",
             displayName: "Bed",
             folderName: "Bed",
             imageFiles: [
-                "1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg", "8.jpg", "9.jpg", "10.jpg",
-                "11.jpg", "12.jpg", "13.jpg", "14.jpg", "15.jpg", "16.jpg", "17.jpg", "18.jpg", "19.jpg", "20.jpg",
-                "21.jpg", "22.jpg", "23.jpg", "24.jpg", "25.jpg", "26.jpg", "27.jpg", "28.jpg", "29.jpg"
+                "1.jpg",
+                "2.jpg",
+                "3.jpg",
+                "4.jpg",
+                "5.jpg",
+                "6.jpg",
+                "7.jpg",
+                "8.jpg",
+                "9.jpg",
+                "10.jpg",
+                "11.jpg",
+                "12.jpg",
+                "13.jpg",
+                "14.jpg",
+                "15.jpg",
+                "16.jpg",
+                "17.jpg",
+                "18.jpg",
+                "19.jpg",
+                "20.jpg",
+                "21.jpg",
+                "22.jpg",
+                "23.jpg",
+                "24.jpg",
+                "25.jpg",
+                "26.jpg",
+                "27.jpg",
+                "28.jpg",
+                "29.jpg"
             ]
         },
         {
             id: "tv-unit",
             displayName: "TV Unit",
             folderName: "TV_Unit",
-            imageFiles: ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg"]
+            imageFiles: [
+                "1.jpg",
+                "2.jpg",
+                "3.jpg",
+                "4.jpg",
+                "5.jpg",
+                "6.jpg",
+                "7.jpg"
+            ]
         },
         {
             id: "dining-table",
             displayName: "Dining Table",
             folderName: "Dining_Table",
-            imageFiles: ["1.jpg"]
+            imageFiles: [
+                "1.jpg"
+            ]
         },
         {
             id: "sofa",
             displayName: "Sofa",
             folderName: "Sofa",
-            imageFiles: ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg"]
+            imageFiles: [
+                "1.jpg",
+                "2.jpg",
+                "3.jpg",
+                "4.jpg",
+                "5.jpg",
+                "6.jpg"
+            ]
         },
         {
             id: "wooden-ceiling",
             displayName: "Wooden Ceiling",
             folderName: "Wooden_Ceiling",
-            imageFiles: ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg", "8.jpg", "9.jpg", "10.jpg", "11.jpg"]
+            imageFiles: [
+                "1.jpg",
+                "2.jpg",
+                "3.jpg",
+                "4.jpg",
+                "5.jpg",
+                "6.jpg",
+                "7.jpg",
+                "8.jpg",
+                "9.jpg",
+                "10.jpg",
+                "11.jpg"
+            ]
         },
         {
             id: "kitchen",
             displayName: "Kitchen",
             folderName: "Kitchen",
-            imageFiles: ["1.jpg", "2.jpg", "3.jpg", "4.jpg"]
+            imageFiles: [
+                "1.jpg",
+                "2.jpg",
+                "3.jpg",
+                "4.jpg"
+            ]
         },
         {
             id: "cupboard",
             displayName: "Cupboard",
             folderName: "Cupboard",
-            imageFiles: ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg", "8.jpg", "9.jpg"]
+            imageFiles: [
+                "1.jpg",
+                "2.jpg",
+                "3.jpg",
+                "4.jpg",
+                "5.jpg",
+                "6.jpg",
+                "7.jpg",
+                "8.jpg",
+                "9.jpg"
+            ]
         },
         {
             id: "pataisan",
             displayName: "Pataisan",
             folderName: "Pataisan",
-            imageFiles: ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg"]
+            imageFiles: [
+                "1.jpg",
+                "2.jpg",
+                "3.jpg",
+                "4.jpg",
+                "5.jpg",
+                "6.jpg",
+                "7.jpg"
+            ]
         },
         {
             id: "furniture",
             displayName: "Furniture",
             folderName: "Furniture",
-            imageFiles: ["1.jpg", "2.jpg", "3.jpg", "4.jpg"]
+            imageFiles: [
+                "1.jpg",
+                "2.jpg",
+                "3.jpg",
+                "4.jpg"
+            ]
         }
     ];
 
@@ -222,7 +232,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             const item = document.createElement('div');
-            item.className = 'gallery-item';
+            item.className = 'gallery-item animate-on-scroll scale-up';
             item.style.transitionDelay = `${categoryIndex * 0.05}s`;
 
             const imageContainer = document.createElement('div');
@@ -236,8 +246,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 img.src = `images/${category.folderName}/${imageFileName}`;
                 img.alt = `${category.displayName} - Image ${imgIndex + 1}`;
                 img.onerror = () => {
-                    console.error(`Error loading image: ${img.src}`);
-                    img.style.display = 'none';
+                    console.error(`Error loading image: ${img.src}. Ensure the path is correct and the image exists.`);
+                    // Optionally, display a placeholder or remove the image element
+                    img.style.display = 'none'; // Hide broken image
                 };
                 if (imgIndex === 0) {
                     img.classList.add('active-slide');
@@ -268,6 +279,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 openLightbox(category.id, 0);
             });
         });
+
+        initializeScrollAnimations(); // Make sure this is called after gallery items are added
     }
 
     function startItemSlideshow(sliderElement, numImages, intervalTime = 2500) {
@@ -292,26 +305,12 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.style.overflow = 'hidden';
         updateLightboxImage(category.displayName);
         lightbox.classList.add('active');
-
-        gsap.fromTo(
-            ".lightbox-image",
-            { scale: 0.8, opacity: 0 },
-            { scale: 1, opacity: 1, duration: 0.5, ease: "back.out(1.7)" }
-        );
     }
 
     function closeLightbox() {
         if (!lightbox) return;
-        gsap.to(".lightbox-image", {
-            scale: 0.8,
-            opacity: 0,
-            duration: 0.3,
-            ease: "power2.in",
-            onComplete: () => {
-                lightbox.classList.remove('active');
-                document.body.style.overflow = 'auto';
-            },
-        });
+        lightbox.classList.remove('active');
+        document.body.style.overflow = 'auto';
     }
 
     function updateLightboxImage(categoryDisplayName) {
@@ -330,15 +329,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (currentLightboxImagePaths.length <= 1) return;
         currentImageIndex = (currentImageIndex + 1) % currentLightboxImagePaths.length;
         const currentCategory = galleryCategories.find(cat => {
+            // Find the category whose folderName matches the one in the current image path
             const pathParts = currentLightboxImagePaths[currentImageIndex].split('/');
             return pathParts.length > 1 && cat.folderName === pathParts[pathParts.length - 2];
         });
         updateLightboxImage(currentCategory ? currentCategory.displayName : 'Image');
-        gsap.fromTo(
-            ".lightbox-image",
-            { x: 50, opacity: 0 },
-            { x: 0, opacity: 1, duration: 0.5, ease: "power2.out" }
-        );
     }
 
     function showPrevImage() {
@@ -349,12 +344,8 @@ document.addEventListener('DOMContentLoaded', () => {
             return pathParts.length > 1 && cat.folderName === pathParts[pathParts.length - 2];
         });
         updateLightboxImage(currentCategory ? currentCategory.displayName : 'Image');
-        gsap.fromTo(
-            ".lightbox-image",
-            { x: -50, opacity: 0 },
-            { x: 0, opacity: 1, duration: 0.5, ease: "power2.out" }
-        );
     }
+
 
     if (lightboxCloseBtn) lightboxCloseBtn.addEventListener('click', closeLightbox);
     if (lightboxPrevBtn) lightboxPrevBtn.addEventListener('click', showPrevImage);
@@ -374,7 +365,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (lightbox) {
         lightbox.addEventListener('click', (e) => {
-            if (e.target === lightbox) {
+            if (e.target === lightbox) { // Close only if clicked on the background, not the image itself
                 closeLightbox();
             }
         });
@@ -389,7 +380,7 @@ document.addEventListener('DOMContentLoaded', () => {
             touchstartX = event.changedTouches[0].screenX;
         }, { passive: true });
 
-        lightboxContentWrapper.addEventListener('touchend', function ( event) {
+        lightboxContentWrapper.addEventListener('touchend', function (event) {
             touchendX = event.changedTouches[0].screenX;
             handleSwipe();
         }, { passive: true });
@@ -397,7 +388,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function handleSwipe() {
         if (currentLightboxImagePaths.length <= 1) return;
-        const swipeThreshold = 50;
+        const swipeThreshold = 50; // Minimum distance for a swipe
         if (touchendX < touchstartX - swipeThreshold) {
             showNextImage();
         }
@@ -406,6 +397,31 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Initial population of gallery
+
+    function initializeScrollAnimations() {
+        const animatedElements = document.querySelectorAll('.animate-on-scroll');
+        if ("IntersectionObserver" in window) {
+            const observer = new IntersectionObserver((entries, observerInstance) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animated');
+                        // Optionally unobserve after animation to save resources
+                        // observerInstance.unobserve(entry.target); 
+                    }
+                });
+            }, { threshold: 0.1 }); // Trigger when 10% of the element is visible
+
+            animatedElements.forEach(el => {
+                observer.observe(el);
+            });
+        } else {
+            // Fallback for browsers that don't support IntersectionObserver
+            animatedElements.forEach(el => el.classList.add('animated'));
+        }
+    }
+
+    // Initial population of gallery and animation setup
     populateGallery();
+    // initializeScrollAnimations(); // This is now called at the end of populateGallery
+
 });

@@ -10,8 +10,6 @@
         href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Hind:wght@400;500;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 </head>
 
 <body>
@@ -39,8 +37,8 @@
     <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="container">
-            <h1 class="hero-headline">Furniture Made to Fit Your Lifestyle</h1>
-            <p class="hero-subline">From Rural Hands to Royal Homes</p>
+            <h1 class="animate-on-scroll slide-in-down">Furniture Made to Fit Your Lifestyle</h1>
+            <p class="animate-on-scroll slide-in-up" style="transition-delay: 0.2s;">From Rural Hands to Royal Homes</p>
             <a href="#contact" class="btn">Get in Touch</a>
         </div>
     </section>
@@ -49,36 +47,40 @@
     <section class="services" id="services">
         <div class="container">
             <div class="section-title">
-                <h2 class="hindi-text">हमारी सेवाएं - Our Services</h2>
+                <h2 class="hindi-text animate-on-scroll fade-in">हमारी सेवाएं - Our Services</h2>
             </div>
             <div class="services-grid">
-                <div class="service-card">
+                <div class="service-card animate-on-scroll slide-in-up">
                     <div class="service-icon">
-                        <i class="fas fa-couch"></i>
+                        <i class="fas fa-couch"></i> <!-- 🛠️ -->
                     </div>
                     <h3>Custom Furniture</h3>
                     <p>Handcrafted furniture tailored to your space, style, and materials by skilled expert carpenters.</p>
+                    <a href="custom-furniture.html" class="btn service-learn-more">Learn More</a>
                 </div>
-                <div class="service-card">
+                <div class="service-card animate-on-scroll slide-in-up" style="transition-delay: 0.1s;">
                     <div class="service-icon">
-                        <i class="fas fa-home"></i>
+                        <i class="fas fa-home"></i> <!-- 🏠 -->
                     </div>
                     <h3>Complete Home Furniture</h3>
                     <p>Full-home custom furniture manufacturing using your materials—flexible pricing to suit your budget.</p>
+                    <a href="complete-home-furniture.html" class="btn service-learn-more">Learn More</a>
                 </div>
-                <div class="service-card">
+                <div class="service-card animate-on-scroll slide-in-up" style="transition-delay: 0.2s;">
                     <div class="service-icon">
-                        <i class="fas fa-tools"></i>
+                        <i class="fas fa-tools"></i> <!-- 🔧 -->
                     </div>
                     <h3>Furniture Repair & Restoration</h3>
                     <p>Revive old furniture with professional repairs using your materials and our craftsmanship.</p>
+                    <a href="furniture-repair.html" class="btn service-learn-more">Learn More</a>
                 </div>
-                <div class="service-card">
+                <div class="service-card animate-on-scroll slide-in-up" style="transition-delay: 0.3s;">
                     <div class="service-icon">
-                        <i class="fas fa-briefcase"></i>
+                        <i class="fas fa-briefcase"></i> <!-- 💼 -->
                     </div>
                     <h3>Office Furniture & Setup</h3>
                     <p>Custom-built office furniture that boosts productivity, tailored to your space and materials.</p>
+                    <a href="office-furniture.html" class="btn service-learn-more">Learn More</a>
                 </div>
             </div>
         </div>
@@ -88,7 +90,7 @@
     <section class="gallery" id="gallery">
         <div class="container">
             <div class="section-title">
-                <h2 class="hindi-text">हमारा फर्नीचर - Our Creations</h2>
+                <h2 class="hindi-text animate-on-scroll fade-in">हमारा फर्नीचर - Our Creations</h2>
             </div>
             <div class="gallery-grid">
                 <!-- Gallery items will be dynamically inserted here by JavaScript -->
@@ -100,13 +102,13 @@
     <section class="about" id="about">
         <div class="container">
             <div class="section-title">
-                <h2 class="hindi-text">हमारे बारे में - About Us</h2>
+                <h2 class="hindi-text animate-on-scroll fade-in">हमारे बारे में - About Us</h2>
             </div>
             <div class="about-content">
-                <div class="about-image">
+                <div class="about-image animate-on-scroll slide-in-left">
                     <img src="https://images.unsplash.com/photo-1585633455839-19b6ae97f8f6" alt="Craftsman at Work">
                 </div>
-                <div class="about-text">
+                <div class="about-text animate-on-scroll slide-in-right" style="transition-delay: 0.1s;">
                     <h3>Traditional Craftsmanship, Modern Design</h3>
                     <p>We are skilled artisans with decades of woodworking expertise, blending traditional techniques
                         with cutting-edge technology. Our team excels in crafting unique, high-quality furniture that
@@ -122,10 +124,10 @@
     <section class="contact" id="contact">
         <div class="container">
             <div class="section-title">
-                <h2 class="hindi-text">संपर्क करें - Contact Us</h2>
+                <h2 class="hindi-text animate-on-scroll fade-in">संपर्क करें - Contact Us</h2>
             </div>
             <div class="contact-wrapper">
-                <div class="contact-info">
+                <div class="contact-info animate-on-scroll slide-in-left">
                     <h3>Get In Touch</h3>
                     <div class="contact-details">
                         <div class="contact-item">
@@ -156,7 +158,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="contact-form">
+                <div class="contact-form animate-on-scroll slide-in-right" style="transition-delay: 0.1s;">
                     <h3>Send Us A Message</h3>
                     <form id="contactForm">
                         <div class="form-group">
@@ -179,7 +181,7 @@
     <footer>
         <div class="container">
             <div class="footer-content">
-                <div class="footer-logo">
+                <div class="footer-logo animate-on-scroll fade-in">
                     <h2>KhatiRaj</h2>
                     <p>Creating beautiful and functional furniture since 1995</p>
                     <div class="social-links">
@@ -189,27 +191,27 @@
                         <a href="#"><i class="fab fa-whatsapp"></i></a>
                     </div>
                 </div>
-                <div class="footer-links">
+                <div class="footer-links animate-on-scroll fade-in" style="transition-delay: 0.1s;">
                     <h3>Quick Links</h3>
                     <ul>
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#services">Services</a></li>
-                        <li><a href="#gallery">Gallery</a></li>
-                        <li><a href="#about">About Us</a></li>
-                        <li><a href="#contact">Contact Us</a></li>
+                        <li><a href="index.html#home">Home</a></li>
+                        <li><a href="index.html#services">Services</a></li>
+                        <li><a href="index.html#gallery">Gallery</a></li>
+                        <li><a href="index.html#about">About Us</a></li>
+                        <li><a href="index.html#contact">Contact Us</a></li>
                     </ul>
                 </div>
-                <div class="footer-links">
+                <div class="footer-links animate-on-scroll fade-in" style="transition-delay: 0.2s;">
                     <h3>Services</h3>
                     <ul>
-                        <li><a href="#services">Custom Furniture</a></li>
-                        <li><a href="#services">Complete Home Furniture</a></li>
-                        <li><a href="#services">Furniture Repair & Restoration</a></li>
-                        <li><a href="#services">Office Furniture & Setup</a></li>
+                        <li><a href="custom-furniture.html">Custom Furniture</a></li>
+                        <li><a href="complete-home-furniture.html">Complete Home Furniture</a></li>
+                        <li><a href="furniture-repair.html">Furniture Repair & Restoration</a></li>
+                        <li><a href="office-furniture.html">Office Furniture & Setup</a></li>
                     </ul>
                 </div>
             </div>
-            <div class="copyright">
+            <div class="copyright animate-on-scroll fade-in" style="transition-delay: 0.3s;">
                 <p>© 2025 KhatiRaj. All rights reserved.</p>
             </div>
         </div>

@@ -30,8 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const targetElement = document.querySelector(targetId);
 
             if (targetElement) {
-                let offset = 70; // Default offset for sticky header
-                // Calculate header height dynamically if possible, or use fixed value
+                let offset = 70;
                 const header = document.querySelector('header');
                 if (header) {
                     offset = header.offsetHeight > 0 ? header.offsetHeight : 70;
@@ -58,172 +57,41 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- GALLERY AND LIGHTBOX CODE ---
-
-    // Integrated galleryCategories from JSON
-    // If you want to load this from an external galleryCategories.json file,
-    // you would need to use fetch API here.
     const galleryCategories = [
+        // ... (Your existing galleryCategories array remains unchanged) ...
         {
             id: "bed",
             displayName: "Bed",
             folderName: "Bed",
-            imageFiles: [
-                "1.jpg",
-                "2.jpg",
-                "3.jpg",
-                "4.jpg",
-                "5.jpg",
-                "6.jpg",
-                "7.jpg",
-                "8.jpg",
-                "9.jpg",
-                "10.jpg",
-                "11.jpg",
-                "12.jpg",
-                "13.jpg",
-                "14.jpg",
-                "15.jpg",
-                "16.jpg",
-                "17.jpg",
-                "18.jpg",
-                "19.jpg",
-                "20.jpg",
-                "21.jpg",
-                "22.jpg",
-                "23.jpg",
-                "24.jpg",
-                "25.jpg",
-                "26.jpg",
-                "27.jpg",
-                "28.jpg",
-                "29.jpg"
-            ]
+            imageFiles: [ "1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg", "8.jpg", "9.jpg", "10.jpg", "11.jpg", "12.jpg", "13.jpg", "14.jpg", "15.jpg", "16.jpg", "17.jpg", "18.jpg", "19.jpg", "20.jpg", "21.jpg", "22.jpg", "23.jpg", "24.jpg", "25.jpg", "26.jpg", "27.jpg", "28.jpg", "29.jpg" ]
         },
-        {
-            id: "tv-unit",
-            displayName: "TV Unit",
-            folderName: "TV_Unit",
-            imageFiles: [
-                "1.jpg",
-                "2.jpg",
-                "3.jpg",
-                "4.jpg",
-                "5.jpg",
-                "6.jpg",
-                "7.jpg"
-            ]
-        },
-        {
-            id: "dining-table",
-            displayName: "Dining Table",
-            folderName: "Dining_Table",
-            imageFiles: [
-                "1.jpg"
-            ]
-        },
-        {
-            id: "sofa",
-            displayName: "Sofa",
-            folderName: "Sofa",
-            imageFiles: [
-                "1.jpg",
-                "2.jpg",
-                "3.jpg",
-                "4.jpg",
-                "5.jpg",
-                "6.jpg"
-            ]
-        },
-        {
-            id: "wooden-ceiling",
-            displayName: "Wooden Ceiling",
-            folderName: "Wooden_Ceiling",
-            imageFiles: [
-                "1.jpg",
-                "2.jpg",
-                "3.jpg",
-                "4.jpg",
-                "5.jpg",
-                "6.jpg",
-                "7.jpg",
-                "8.jpg",
-                "9.jpg",
-                "10.jpg",
-                "11.jpg"
-            ]
-        },
-        {
-            id: "kitchen",
-            displayName: "Kitchen",
-            folderName: "Kitchen",
-            imageFiles: [
-                "1.jpg",
-                "2.jpg",
-                "3.jpg",
-                "4.jpg"
-            ]
-        },
-        {
-            id: "cupboard",
-            displayName: "Cupboard",
-            folderName: "Cupboard",
-            imageFiles: [
-                "1.jpg",
-                "2.jpg",
-                "3.jpg",
-                "4.jpg",
-                "5.jpg",
-                "6.jpg",
-                "7.jpg",
-                "8.jpg",
-                "9.jpg"
-            ]
-        },
-        {
-            id: "pataisan",
-            displayName: "Pataisan",
-            folderName: "Pataisan",
-            imageFiles: [
-                "1.jpg",
-                "2.jpg",
-                "3.jpg",
-                "4.jpg",
-                "5.jpg",
-                "6.jpg",
-                "7.jpg"
-            ]
-        },
-        {
-            id: "furniture",
-            displayName: "Furniture",
-            folderName: "Furniture",
-            imageFiles: [
-                "1.jpg",
-                "2.jpg",
-                "3.jpg",
-                "4.jpg"
-            ]
-        }
+        { id: "tv-unit", displayName: "TV Unit", folderName: "TV_Unit", imageFiles: [ "1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg" ] },
+        { id: "dining-table", displayName: "Dining Table", folderName: "Dining_Table", imageFiles: [ "1.jpg" ] },
+        { id: "sofa", displayName: "Sofa", folderName: "Sofa", imageFiles: [ "1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg" ] },
+        { id: "wooden-ceiling", displayName: "Wooden Ceiling", folderName: "Wooden_Ceiling", imageFiles: [ "1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg", "8.jpg", "9.jpg", "10.jpg", "11.jpg" ] },
+        { id: "kitchen", displayName: "Kitchen", folderName: "Kitchen", imageFiles: [ "1.jpg", "2.jpg", "3.jpg", "4.jpg" ] },
+        { id: "cupboard", displayName: "Cupboard", folderName: "Cupboard", imageFiles: [ "1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg", "8.jpg", "9.jpg" ] },
+        { id: "pataisan", displayName: "Pataisan", folderName: "Pataisan", imageFiles: [ "1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg" ] },
+        { id: "furniture", displayName: "Furniture", folderName: "Furniture", imageFiles: [ "1.jpg", "2.jpg", "3.jpg", "4.jpg" ] }
     ];
 
     const galleryGrid = document.querySelector('.gallery-grid');
     const lightbox = document.getElementById('lightbox');
     const lightboxImage = document.getElementById('lightboxImage');
     const lightboxCaption = document.getElementById('lightboxCaption');
+    const lightboxThumbnailsContainer = document.getElementById('lightboxThumbnails');
+    const lightboxLoader = document.getElementById('lightboxLoader');
     const lightboxCloseBtn = document.querySelector('.lightbox-close-btn');
     const lightboxPrevBtn = document.querySelector('.lightbox-prev-btn');
     const lightboxNextBtn = document.querySelector('.lightbox-next-btn');
 
     let currentLightboxImagePaths = [];
     let currentImageIndex = 0;
-    let categorySlideshowIntervals = [];
+    let currentLightboxCategoryName = '';
 
     function populateGallery() {
         if (!galleryGrid) return;
         galleryGrid.innerHTML = '';
-
-        categorySlideshowIntervals.forEach(clearInterval);
-        categorySlideshowIntervals = [];
 
         galleryCategories.forEach((category, categoryIndex) => {
             if (!category.imageFiles || category.imageFiles.length === 0) {
@@ -238,32 +106,33 @@ document.addEventListener('DOMContentLoaded', () => {
             const imageContainer = document.createElement('div');
             imageContainer.className = 'gallery-item-image-container';
 
-            const slider = document.createElement('div');
-            slider.className = 'gallery-image-slider';
-
-            category.imageFiles.forEach((imageFileName, imgIndex) => {
-                const img = document.createElement('img');
-                img.src = `images/${category.folderName}/${imageFileName}`;
-                img.alt = `${category.displayName} - Image ${imgIndex + 1}`;
-                img.onerror = () => {
-                    console.error(`Error loading image: ${img.src}. Ensure the path is correct and the image exists.`);
-                    // Optionally, display a placeholder or remove the image element
-                    img.style.display = 'none'; // Hide broken image
-                };
-                if (imgIndex === 0) {
-                    img.classList.add('active-slide');
-                }
-                slider.appendChild(img);
-            });
-            imageContainer.appendChild(slider);
+            const firstImageFileName = category.imageFiles[0];
+            const img = document.createElement('img');
+            img.src = `images/${category.folderName}/${firstImageFileName}`;
+            img.alt = `${category.displayName} - Preview`;
+            img.loading = 'lazy'; // Add lazy loading for grid images
+            img.onerror = () => {
+                console.error(`Error loading image: ${img.src}.`);
+                img.style.display = 'none';
+            };
+            imageContainer.appendChild(img);
 
             const overlay = document.createElement('div');
             overlay.className = 'gallery-overlay';
+            
+            const overlayContent = document.createElement('div');
+            overlayContent.className = 'gallery-overlay-content';
             const viewIcon = document.createElement('i');
             viewIcon.className = 'fas fa-search-plus';
-            overlay.appendChild(viewIcon);
-            imageContainer.appendChild(overlay);
+            overlayContent.appendChild(viewIcon);
 
+            const imageCountText = document.createElement('p');
+            imageCountText.className = 'gallery-item-image-count';
+            imageCountText.textContent = `${category.imageFiles.length} image${category.imageFiles.length > 1 ? 's' : ''}`;
+            overlayContent.appendChild(imageCountText);
+            
+            overlay.appendChild(overlayContent);
+            imageContainer.appendChild(overlay);
             item.appendChild(imageContainer);
 
             const titleDiv = document.createElement('div');
@@ -273,26 +142,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
             galleryGrid.appendChild(item);
 
-            startItemSlideshow(slider, category.imageFiles.length);
-
             imageContainer.addEventListener('click', () => {
                 openLightbox(category.id, 0);
             });
         });
 
-        initializeScrollAnimations(); // Make sure this is called after gallery items are added
-    }
-
-    function startItemSlideshow(sliderElement, numImages, intervalTime = 2500) {
-        if (numImages <= 1) return;
-        const images = sliderElement.querySelectorAll('img');
-        let currentIndex = 0;
-        const intervalId = setInterval(() => {
-            if (images[currentIndex]) images[currentIndex].classList.remove('active-slide');
-            currentIndex = (currentIndex + 1) % images.length;
-            if (images[currentIndex]) images[currentIndex].classList.add('active-slide');
-        }, intervalTime);
-        categorySlideshowIntervals.push(intervalId);
+        initializeScrollAnimations();
     }
 
     function openLightbox(categoryId, imgIndex) {
@@ -301,9 +156,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         currentLightboxImagePaths = category.imageFiles.map(fileName => `images/${category.folderName}/${fileName}`);
         currentImageIndex = imgIndex;
+        currentLightboxCategoryName = category.displayName;
 
         document.body.style.overflow = 'hidden';
-        updateLightboxImage(category.displayName);
+        updateLightboxImage();
+        populateLightboxThumbnails();
         lightbox.classList.add('active');
     }
 
@@ -311,41 +168,106 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!lightbox) return;
         lightbox.classList.remove('active');
         document.body.style.overflow = 'auto';
+        if (lightboxLoader) {
+            lightboxLoader.style.display = 'none';
+        }
+        if (lightboxImage) {
+            lightboxImage.src = ""; // Clear image src to stop loading/display
+        }
     }
 
-    function updateLightboxImage(categoryDisplayName) {
-        if (currentLightboxImagePaths.length === 0 || !lightboxImage || !lightboxCaption || !lightboxPrevBtn || !lightboxNextBtn) return;
+    function populateLightboxThumbnails() {
+        if (!lightboxThumbnailsContainer) return;
+        lightboxThumbnailsContainer.innerHTML = '';
 
-        lightboxImage.src = currentLightboxImagePaths[currentImageIndex];
-        lightboxImage.alt = `${categoryDisplayName} - Image ${currentImageIndex + 1} of ${currentLightboxImagePaths.length}`;
-        lightboxCaption.textContent = `${categoryDisplayName} - Image ${currentImageIndex + 1} of ${currentLightboxImagePaths.length}`;
+        if (currentLightboxImagePaths.length <= 1) {
+            lightboxThumbnailsContainer.style.display = 'none';
+            return;
+        }
+        lightboxThumbnailsContainer.style.display = 'flex';
+
+        currentLightboxImagePaths.forEach((path, index) => {
+            const thumbImg = document.createElement('img');
+            thumbImg.src = path;
+            thumbImg.alt = `${currentLightboxCategoryName} - Thumbnail ${index + 1}`;
+            thumbImg.className = 'lightbox-thumbnail-img';
+            thumbImg.loading = 'lazy'; // Lazy load thumbnails too
+            if (index === currentImageIndex) {
+                thumbImg.classList.add('active-thumbnail');
+            }
+            thumbImg.addEventListener('click', () => {
+                currentImageIndex = index;
+                updateLightboxImage();
+            });
+            lightboxThumbnailsContainer.appendChild(thumbImg);
+        });
+        scrollActiveThumbnailIntoView();
+    }
+
+    function updateLightboxImage() {
+        if (currentLightboxImagePaths.length === 0 || !lightboxImage || !lightboxCaption || !lightboxPrevBtn || !lightboxNextBtn || !lightboxLoader) return;
+
+        lightboxLoader.style.display = 'block';
+        lightboxImage.style.opacity = '0';
+        
+        const imageIndexToLoad = currentImageIndex; // Capture current index for closure
+
+        const newImage = new Image();
+        newImage.onload = () => {
+            if (currentImageIndex === imageIndexToLoad && lightbox.classList.contains('active')) { // Check if still relevant
+                lightboxImage.src = newImage.src;
+                lightboxImage.alt = `${currentLightboxCategoryName} - Image ${currentImageIndex + 1} of ${currentLightboxImagePaths.length}`;
+                lightboxCaption.textContent = `${currentLightboxCategoryName} - Image ${currentImageIndex + 1} of ${currentLightboxImagePaths.length}`;
+                lightboxLoader.style.display = 'none';
+                lightboxImage.style.opacity = '1';
+            }
+        };
+        newImage.onerror = () => {
+            if (currentImageIndex === imageIndexToLoad && lightbox.classList.contains('active')) {
+                lightboxCaption.textContent = 'Error loading image.';
+                lightboxLoader.style.display = 'none';
+                lightboxImage.style.opacity = '1'; // Show broken image icon if src was set or placeholder
+                console.error("Error loading lightbox image: " + newImage.src);
+            }
+        };
+        newImage.src = currentLightboxImagePaths[currentImageIndex];
+
 
         const showNav = currentLightboxImagePaths.length > 1;
         lightboxPrevBtn.style.display = showNav ? 'block' : 'none';
         lightboxNextBtn.style.display = showNav ? 'block' : 'none';
+
+        if (lightboxThumbnailsContainer && currentLightboxImagePaths.length > 1) {
+            lightboxThumbnailsContainer.style.display = 'flex';
+            const thumbnails = lightboxThumbnailsContainer.querySelectorAll('.lightbox-thumbnail-img');
+            thumbnails.forEach((thumb, idx) => {
+                thumb.classList.toggle('active-thumbnail', idx === currentImageIndex);
+            });
+            scrollActiveThumbnailIntoView();
+        } else if (lightboxThumbnailsContainer) {
+            lightboxThumbnailsContainer.style.display = 'none';
+        }
+    }
+
+    function scrollActiveThumbnailIntoView() {
+        if (!lightboxThumbnailsContainer) return;
+        const activeThumb = lightboxThumbnailsContainer.querySelector('.active-thumbnail');
+        if (activeThumb) {
+            activeThumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        }
     }
 
     function showNextImage() {
         if (currentLightboxImagePaths.length <= 1) return;
         currentImageIndex = (currentImageIndex + 1) % currentLightboxImagePaths.length;
-        const currentCategory = galleryCategories.find(cat => {
-            // Find the category whose folderName matches the one in the current image path
-            const pathParts = currentLightboxImagePaths[currentImageIndex].split('/');
-            return pathParts.length > 1 && cat.folderName === pathParts[pathParts.length - 2];
-        });
-        updateLightboxImage(currentCategory ? currentCategory.displayName : 'Image');
+        updateLightboxImage();
     }
 
     function showPrevImage() {
         if (currentLightboxImagePaths.length <= 1) return;
         currentImageIndex = (currentImageIndex - 1 + currentLightboxImagePaths.length) % currentLightboxImagePaths.length;
-        const currentCategory = galleryCategories.find(cat => {
-            const pathParts = currentLightboxImagePaths[currentImageIndex].split('/');
-            return pathParts.length > 1 && cat.folderName === pathParts[pathParts.length - 2];
-        });
-        updateLightboxImage(currentCategory ? currentCategory.displayName : 'Image');
+        updateLightboxImage();
     }
-
 
     if (lightboxCloseBtn) lightboxCloseBtn.addEventListener('click', closeLightbox);
     if (lightboxPrevBtn) lightboxPrevBtn.addEventListener('click', showPrevImage);
@@ -353,21 +275,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.addEventListener('keydown', (e) => {
         if (lightbox && lightbox.classList.contains('active')) {
-            if (e.key === 'Escape') {
-                closeLightbox();
-            } else if (e.key === 'ArrowLeft' && currentLightboxImagePaths.length > 1) {
-                showPrevImage();
-            } else if (e.key === 'ArrowRight' && currentLightboxImagePaths.length > 1) {
-                showNextImage();
-            }
+            if (e.key === 'Escape') closeLightbox();
+            else if (e.key === 'ArrowLeft' && currentLightboxImagePaths.length > 1) showPrevImage();
+            else if (e.key === 'ArrowRight' && currentLightboxImagePaths.length > 1) showNextImage();
         }
     });
 
     if (lightbox) {
         lightbox.addEventListener('click', (e) => {
-            if (e.target === lightbox) { // Close only if clicked on the background, not the image itself
-                closeLightbox();
-            }
+            if (e.target === lightbox) closeLightbox();
         });
     }
 
@@ -388,40 +304,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function handleSwipe() {
         if (currentLightboxImagePaths.length <= 1) return;
-        const swipeThreshold = 50; // Minimum distance for a swipe
-        if (touchendX < touchstartX - swipeThreshold) {
-            showNextImage();
-        }
-        if (touchendX > touchstartX + swipeThreshold) {
-            showPrevImage();
-        }
+        const swipeThreshold = 50;
+        if (touchendX < touchstartX - swipeThreshold) showNextImage();
+        if (touchendX > touchstartX + swipeThreshold) showPrevImage();
     }
-
 
     function initializeScrollAnimations() {
         const animatedElements = document.querySelectorAll('.animate-on-scroll');
         if ("IntersectionObserver" in window) {
-            const observer = new IntersectionObserver((entries, observerInstance) => {
+            const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('animated');
-                        // Optionally unobserve after animation to save resources
-                        // observerInstance.unobserve(entry.target); 
                     }
                 });
-            }, { threshold: 0.1 }); // Trigger when 10% of the element is visible
-
-            animatedElements.forEach(el => {
-                observer.observe(el);
-            });
+            }, { threshold: 0.1 });
+            animatedElements.forEach(el => observer.observe(el));
         } else {
-            // Fallback for browsers that don't support IntersectionObserver
             animatedElements.forEach(el => el.classList.add('animated'));
         }
     }
 
-    // Initial population of gallery and animation setup
     populateGallery();
-    // initializeScrollAnimations(); // This is now called at the end of populateGallery
-
 });

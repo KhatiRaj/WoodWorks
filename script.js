@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (targetElement) {
                 let offset = 70; // Default offset for sticky header
-                 // Calculate header height dynamically if possible, or use fixed value
+                // Calculate header height dynamically if possible, or use fixed value
                 const header = document.querySelector('header');
                 if (header) {
                     offset = header.offsetHeight > 0 ? header.offsetHeight : 70;
@@ -71,7 +71,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 "1.jpg",
                 "2.jpg",
                 "3.jpg",
-                "4.jpg"
+                "4.jpg",
+                "5.jpg",
+                "6.jpg",
+                "7.jpg",
+                "8.jpg",
+                "9.jpg",
+                "10.jpg",
+                "11.jpg",
+                "12.jpg"
             ]
         },
         {
@@ -82,7 +90,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 "1.jpg",
                 "2.jpg",
                 "3.jpg",
-                "4.jpg"
+                "4.jpg",
+                "5.jpg",
+                "6.jpg",
+                "7.jpg",
+                "8.jpg",
+                "9.jpg",
+                "10.jpg",
+                "11.jpg",
+                "12.jpg"
             ]
         },
         {
@@ -93,7 +109,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 "1.jpg",
                 "2.jpg",
                 "3.jpg",
-                "4.jpg"
+                "4.jpg",
+                "5.jpg",
+                "6.jpg",
+                "7.jpg",
+                "8.jpg",
+                "9.jpg",
+                "10.jpg",
+                "11.jpg",
+                "12.jpg"
             ]
         },
         {
@@ -104,7 +128,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 "1.jpg",
                 "2.jpg",
                 "3.jpg",
-                "4.jpg"
+                "4.jpg",
+                "5.jpg",
+                "6.jpg",
+                "7.jpg",
+                "8.jpg",
+                "9.jpg",
+                "10.jpg",
+                "11.jpg",
+                "12.jpg"
             ]
         },
         {
@@ -115,7 +147,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 "1.jpg",
                 "2.jpg",
                 "3.jpg",
-                "4.jpg"
+                "4.jpg",
+                "5.jpg",
+                "6.jpg",
+                "7.jpg",
+                "8.jpg",
+                "9.jpg",
+                "10.jpg",
+                "11.jpg",
+                "12.jpg"
             ]
         },
         {
@@ -126,7 +166,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 "1.jpg",
                 "2.jpg",
                 "3.jpg",
-                "4.jpg"
+                "4.jpg",
+                "5.jpg",
+                "6.jpg",
+                "7.jpg",
+                "8.jpg",
+                "9.jpg",
+                "10.jpg",
+                "11.jpg",
+                "12.jpg"
             ]
         },
         {
@@ -137,7 +185,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 "1.jpg",
                 "2.jpg",
                 "3.jpg",
-                "4.jpg"
+                "4.jpg",
+                "5.jpg",
+                "6.jpg",
+                "7.jpg",
+                "8.jpg",
+                "9.jpg",
+                "10.jpg",
+                "11.jpg",
+                "12.jpg"
             ]
         },
         {
@@ -148,7 +204,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 "1.jpg",
                 "2.jpg",
                 "3.jpg",
-                "4.jpg"
+                "4.jpg",
+                "5.jpg",
+                "6.jpg",
+                "7.jpg",
+                "8.jpg",
+                "9.jpg",
+                "10.jpg",
+                "11.jpg",
+                "12.jpg"
             ]
         }
     ];
@@ -168,7 +232,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function populateGallery() {
         if (!galleryGrid) return;
         galleryGrid.innerHTML = '';
-        
+
         categorySlideshowIntervals.forEach(clearInterval);
         categorySlideshowIntervals = [];
 
@@ -181,10 +245,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const item = document.createElement('div');
             item.className = 'gallery-item animate-on-scroll scale-up';
             item.style.transitionDelay = `${categoryIndex * 0.05}s`;
-            
+
             const imageContainer = document.createElement('div');
             imageContainer.className = 'gallery-item-image-container';
-            
+
             const slider = document.createElement('div');
             slider.className = 'gallery-image-slider';
 
@@ -210,7 +274,7 @@ document.addEventListener('DOMContentLoaded', () => {
             viewIcon.className = 'fas fa-search-plus';
             overlay.appendChild(viewIcon);
             imageContainer.appendChild(overlay);
-            
+
             item.appendChild(imageContainer);
 
             const titleDiv = document.createElement('div');
@@ -248,7 +312,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         currentLightboxImagePaths = category.imageFiles.map(fileName => `images/${category.folderName}/${fileName}`);
         currentImageIndex = imgIndex;
-        
+
         document.body.style.overflow = 'hidden';
         updateLightboxImage(category.displayName);
         lightbox.classList.add('active');
@@ -317,17 +381,17 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
-    
+
     let touchstartX = 0;
     let touchendX = 0;
     const lightboxContentWrapper = document.querySelector('.lightbox-content-wrapper');
 
     if (lightboxContentWrapper) {
-        lightboxContentWrapper.addEventListener('touchstart', function(event) {
+        lightboxContentWrapper.addEventListener('touchstart', function (event) {
             touchstartX = event.changedTouches[0].screenX;
         }, { passive: true });
 
-        lightboxContentWrapper.addEventListener('touchend', function(event) {
+        lightboxContentWrapper.addEventListener('touchend', function (event) {
             touchendX = event.changedTouches[0].screenX;
             handleSwipe();
         }, { passive: true });

@@ -27,11 +27,11 @@ document.addEventListener('DOMContentLoaded', () => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
             const targetId = this.getAttribute('href');
-            
+
             // If the link is to a different page (e.g., index.html#services from service-detail.html)
             if (targetId.startsWith('index.html#') && !window.location.pathname.endsWith('index.html') && window.location.pathname !== '/') {
-                 window.location.href = targetId;
-                 return; // Stop further processing for this click
+                window.location.href = targetId;
+                return; // Stop further processing for this click
             }
 
 
@@ -48,9 +48,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (targetId === '#home' || targetId === 'index.html#home') { // Handle #home from any page
                     offset = 0;
                 }
-                
+
                 let scrollPosition = targetElement.offsetTop - offset;
-                
+
                 window.scrollTo({
                     top: scrollPosition,
                     behavior: 'smooth'
@@ -62,17 +62,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 // For simple multi-page sites, this should be fine.
                 const hash = targetId.substring(targetId.indexOf('#'));
                 const elementOnIndex = document.querySelector(hash);
-                 if (elementOnIndex) {
+                if (elementOnIndex) {
                     let offset = 70;
                     const header = document.querySelector('header');
                     if (header) offset = header.offsetHeight > 0 ? header.offsetHeight : 70;
                     if (hash === '#home') offset = 0;
-                    
+
                     window.scrollTo({
                         top: elementOnIndex.offsetTop - offset,
                         behavior: 'smooth'
                     });
-                 }
+                }
             }
         });
     });
@@ -125,7 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
             folderName: "Pataisan",
             imageFiles: ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg"]
         },
-        { id: "furniture", displayName: "Furniture", folderName: "Furniture", imageFiles: ["1.jpg", "2.jpg", "3.jpg", "4.jpg"] }
+        { id: "furniture", displayName: "Furniture", folderName: "Furniture", imageFiles: ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg"] }
     ];
 
     const galleryGrid = document.querySelector('.gallery-grid');
@@ -169,7 +169,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 img.alt = `${category.displayName} - Image ${imgIndex + 1}`;
                 img.onerror = () => {
                     console.error(`Error loading image: ${img.src}. Ensure the path is correct and the image exists.`);
-                    img.style.display = 'none'; 
+                    img.style.display = 'none';
                 };
                 if (imgIndex === 0) {
                     img.classList.add('active-slide');
@@ -201,7 +201,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
-        initializeScrollAnimations(); 
+        initializeScrollAnimations();
     }
 
     function startItemSlideshow(sliderElement, numImages, intervalTime = 2500) {
@@ -285,7 +285,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (lightbox) {
         lightbox.addEventListener('click', (e) => {
-            if (e.target === lightbox) { 
+            if (e.target === lightbox) {
                 closeLightbox();
             }
         });
@@ -308,7 +308,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function handleSwipe() {
         if (currentLightboxImagePaths.length <= 1) return;
-        const swipeThreshold = 50; 
+        const swipeThreshold = 50;
         if (touchendX < touchstartX - swipeThreshold) {
             showNextImage();
         }
@@ -325,10 +325,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('animated');
-                         // observerInstance.unobserve(entry.target); // Optional
+                        // observerInstance.unobserve(entry.target); // Optional
                     }
                 });
-            }, { threshold: 0.1 }); 
+            }, { threshold: 0.1 });
 
             animatedElements.forEach(el => {
                 observer.observe(el);
@@ -337,7 +337,7 @@ document.addEventListener('DOMContentLoaded', () => {
             animatedElements.forEach(el => el.classList.add('animated'));
         }
     }
-    
+
     // Initial population of gallery if on index.html
     if (document.querySelector('.gallery-grid')) { // Only run populateGallery if gallery-grid exists on the current page
         populateGallery();
@@ -361,9 +361,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 window.scrollTo({
                     top: targetElement.offsetTop - offset,
-                    behavior: 'smooth' 
+                    behavior: 'smooth'
                 });
-            }, 100); 
+            }, 100);
         }
     }
 
